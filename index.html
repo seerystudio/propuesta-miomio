@@ -856,32 +856,7 @@ html.js .cadena li:nth-child(4)::before{transition-delay:1.3s}
 .ig__dest svg{width:26px;height:26px;fill:none;stroke:var(--hueso);stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round}
 .ig__pie{margin-top:14px;font-size:12px;color:var(--gris);font-weight:300}
 @media(max-width:800px){.perfil{grid-template-columns:minmax(0,1fr);gap:44px 0}.ig{max-width:390px}}
-/* §02: la apertura de la Parte 1 es también la tapa de la sección. Se lee en una sola columna,
-   de arriba abajo: título → la idea central → 1 canal por canal → 2 lo que falta.
-   Jerarquía por tamaño y peso; el naranja queda solo para rótulos y números. */
-.s02-cab{background:var(--negro-2);border-top:1px solid var(--linea);padding:88px 0 56px}
-.s02-cab h2{margin:14px 0 0;font-family:var(--tit);font-weight:700;letter-spacing:-.045em;font-size:clamp(44px,6vw,80px);line-height:.95}
-.s02-cab__q{margin:18px 0 0;max-width:48ch;font-size:clamp(17px,1.5vw,20px);line-height:1.5;font-weight:300;color:var(--gris)}
-.s02-cuerpo{padding-top:64px;display:flex;flex-direction:column;gap:88px}
-.s02-tesis{max-width:760px}
-.s02-tesis__t{margin:0;font-family:var(--tit);font-weight:600;letter-spacing:-.04em;font-size:clamp(30px,3.6vw,48px);line-height:1.05}
-.s02-tesis__x{margin:16px 0 0;max-width:56ch;font-size:18px;line-height:1.6;font-weight:400;color:var(--hueso)}
-.s02-tesis__x b{font-weight:600}
-.s02-bloque{margin:0}
-.s02-bloque__cab{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:baseline;gap:0 14px;padding-bottom:18px}
-.s02-n{font-family:var(--tit);font-weight:600;font-size:15px;color:var(--naranja);font-variant-numeric:tabular-nums}
-.s02-bloque__cab h3{margin:0;font-family:var(--tit);font-weight:600;letter-spacing:-.03em;font-size:clamp(22px,2.4vw,28px);line-height:1.15}
-.s02-fecha{font-size:13px;font-weight:300;color:var(--gris)}
-.s02-bloque .nadie{max-width:760px}
 .canales span + span{margin-top:6px;color:var(--gris)}
-.s02-conclu{margin:0;padding:22px 0 0;border-top:1px solid var(--linea-2);font-family:var(--tit);font-weight:600;letter-spacing:-.03em;font-size:clamp(18px,1.9vw,22px);line-height:1.3;max-width:52ch}
-@media(max-width:800px){
-  .s02-cab{padding:64px 0 40px}
-  .s02-cuerpo{padding-top:44px;gap:64px}
-  .s02-bloque__cab{grid-template-columns:auto minmax(0,1fr)}
-  .s02-fecha{grid-column:2;margin-top:4px}
-  .s02-tesis__x{font-size:16.5px}
-}
 /* Apertura de sección: la columna derecha de .intro puede traer un rótulo y una lista */
 .intro > div > .rot{display:block;margin-bottom:14px}
 /* Animaciones con motivo (todas se ven completas sin JS y con movimiento reducido):
@@ -936,29 +911,136 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
 .toc a{display:flex;align-items:baseline;gap:18px;padding:14px 0;min-height:48px;text-decoration:none;font-size:16.5px;font-weight:500;letter-spacing:-.015em;transition:color .2s ease}
 .toc a span{flex:none;width:22px;font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--gris);font-variant-numeric:tabular-nums}
 @media(hover:hover) and (pointer:fine){.toc a:hover{color:var(--naranja)}.toc a:hover span{color:var(--naranja)}}
-/* Apertura de cada parte */
-.parte-sep{background:var(--negro-2);border-top:1px solid var(--linea)}
-.parte-sep__in{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:10px 80px;align-items:end;padding-top:88px;padding-bottom:88px}
-.parte-sep__in .rot{grid-column:1/-1}
-.parte-sep__t{margin:0;font-family:var(--tit);font-weight:700;font-size:clamp(40px,5.4vw,72px);letter-spacing:-.04em;line-height:.95}
-.parte-sep__q{margin:0;max-width:46ch;font-size:clamp(17px,1.5vw,20px);line-height:1.5;font-weight:300}
-/* Las tapas de sección, sin el medio pantallazo vacío */
-.tapa{min-height:0;padding:128px 0 36px}
-.parte-sep + section .tapa{border-top:0;padding-top:88px}
-.tapa h2{letter-spacing:-.04em}
 @media(max-width:900px){
-  .tapa-doc,.toc__cab,.toc__partes,.parte-sep__in{grid-template-columns:minmax(0,1fr)}
+  .tapa-doc,.toc__cab,.toc__partes{grid-template-columns:minmax(0,1fr)}
   .tapa-doc{gap:40px}
   .tapa-doc{margin-top:44px}.tapa-doc__lado{padding-top:0}
   .docmeta div{padding:16px 12px 22px 0}.docmeta div + div{padding-left:14px}.docmeta dd{font-size:14px}
   .toc{padding:88px 0 96px}
   .toc__parte:last-child ol{columns:1}
-  .parte-sep__in{padding-top:64px;padding-bottom:64px}
-  .tapa{padding-top:96px}
 }
 @media(max-width:700px){.portada{padding-top:112px;gap:56px}.portada .rotulo{margin-bottom:28px}.tapa-doc__lado .bajar{width:100%;justify-content:space-between;margin-top:0}}
 @media(max-width:800px){.cadena--4{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:28px}.cadena--4::before{display:none}.fmtv--3{grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 14px}.fmtv--3 .fv__vid{max-width:none}.fmtv--3 .fv h4{font-size:16.5px}.fmtv--3 .fv__req{font-size:13.5px}}
 .refs{max-width:860px}
+
+/* ══════════ REGLAS DE DISEÑO (ver REGLAS-DE-DISENO.md) ══════════
+   Dos familias: Inter Tight (títulos, subtítulos, cifras) e Inter (párrafos y elementos).
+   Cuatro roles de texto, pesos 400/600/700, un color de texto (hueso; gris para lo secundario).
+   Van prefijadas con #doc para mandar sobre los estilos heredados del molde. */
+:root{
+  --r-titulo:clamp(40px,5.6vw,72px);
+  --r-sub-l:clamp(26px,3vw,38px);
+  --r-sub:clamp(19px,1.8vw,23px);
+  --r-parrafo:17px;
+  --r-nombre:16px;
+  --r-texto:15px;
+  --r-nota:13px;
+  --r-rotulo:11px;
+  --r-cifra:clamp(40px,4.6vw,60px);
+  --r-cab-arriba:96px; --r-cab-abajo:56px;
+  --r-intro:64px;
+  --r-bloques:96px;
+  --r-cab-bloque:20px;
+}
+@media(max-width:800px){
+  :root{--r-parrafo:16px;--r-cab-arriba:64px;--r-cab-abajo:40px;--r-intro:44px;--r-bloques:64px}
+}
+
+/* ── 1 · Título ── */
+#doc .sec-cab h2,#doc .toc__cab h2{
+  font-family:var(--tit);font-weight:700;font-size:var(--r-titulo);letter-spacing:-.045em;line-height:.95;color:var(--hueso)}
+
+/* ── 2 · Subtítulo grande: la frase clave ── */
+#doc .intro__lead,#doc .cruce__txt,#doc .cliente__n{
+  font-family:var(--tit);font-weight:600;font-size:var(--r-sub-l);letter-spacing:-.035em;line-height:1.1;color:var(--hueso);max-width:26ch;text-wrap:balance}
+#doc .intro__lead em,#doc .cruce__txt em{font-style:normal;color:inherit}
+
+/* ── 2b · Subtítulo: encabezado de bloque y conclusiones ── */
+#doc section h3,#doc .conclu{
+  font-family:var(--tit);font-weight:600;font-size:var(--r-sub);letter-spacing:-.025em;line-height:1.2;color:var(--hueso)}
+#doc section h3{max-width:30ch;text-wrap:balance}
+#doc .giro__lado--antes h3{font-weight:600;color:var(--gris)}
+
+/* ── 3 · Párrafo ── */
+#doc .intro__txt,#doc .sec-cab__q,#doc .toc__cab p,#doc .ficha p,#doc .bloque p,#doc .giro__lado p,#doc .decision p,#doc .bajada{
+  font-family:var(--sans);font-weight:400;font-size:var(--r-parrafo);line-height:1.6;letter-spacing:0}
+#doc .intro__txt b,#doc .ficha p b,#doc .bloque p b,#doc .decision p b{font-weight:600}
+#doc .sec-cab__q,#doc .cliente__d{color:var(--gris)}
+
+/* ── 4 · Elementos ── */
+/* nombre del ítem */
+#doc section h4,#doc .versus thead th,#doc .canales b,#doc .cadena b,#doc .cartera li,#doc .persona__sit,#doc .tabla tbody th,
+#doc .esc__mom,#doc .esc__barra b,#doc .estado,#doc .piezas b,#doc .semanas tbody td,#doc .chat__cab b,#doc .docmeta dd,#doc .toc a{
+  font-family:var(--sans);font-weight:600;font-size:var(--r-nombre);letter-spacing:-.011em;line-height:1.35}
+/* texto del ítem */
+#doc .canales span,#doc .cadena span,#doc .nadie li,#doc .versus td,#doc .cuad li,#doc .persona dd,#doc .persona__rol,
+#doc .tabla td,#doc .tema p,#doc .fv__req,#doc .esc__come,#doc .kpi p,#doc .piezas span,#doc .sitio__nota,#doc .burbuja,
+#doc .chips li,#doc .semanas tbody td[colspan],#doc .tablero__cab span,#doc .cliente__d,#doc .versus .c-so,#doc .versus .c-ant,#doc .estado--gris,#doc .cartera .mas{
+  font-family:var(--sans);font-weight:400;font-size:var(--r-texto);letter-spacing:0;line-height:1.5}
+#doc .nadie b,#doc .versus .c-ch,#doc .versus .c-nue{font-weight:600}
+#doc .versus .c-ant,#doc .estado--gris,#doc .cartera .mas,#doc .tablero__cab span{color:var(--gris)}
+/* rótulo */
+#doc .rot,#doc .rotulo,#doc .cuad__n,#doc .persona dt,#doc .versus tbody th,#doc .tabla thead th,#doc .esc__n,#doc .fv__n,
+#doc .kpi__hoy span,#doc .docmeta dt,#doc .toc__n,#doc .semanas td .num,#doc .toc a span,
+#doc .nadie li::before,#doc .piezas li::before,#doc .versus td::before,#doc .tabla td::before,#doc .kpi::before{
+  font-family:var(--sans);font-weight:600;font-size:var(--r-rotulo);letter-spacing:.14em;text-transform:uppercase;line-height:1.4}
+#doc .esc--ok .esc__n{font-weight:600;color:var(--gris)}
+/* nota */
+#doc .bq-nota,#doc .fv__fuente,#doc .fv__fuente a,#doc .chat__cab span{
+  font-family:var(--sans);font-weight:400;font-size:var(--r-nota);line-height:1.5;color:var(--gris)}
+/* cifra grande */
+#doc .col__n,#doc .kpi__hoy b,#doc .tema__pct,#doc .cuad__letra{
+  font-family:var(--tit);font-weight:600;font-size:var(--r-cifra);letter-spacing:-.05em;line-height:.9}
+#doc .col--al .col__n{font-weight:600;color:var(--gris)}
+
+/* ── Orden de lectura de cada sección: cabecera → frase clave → bloques ── */
+#doc .sec-cab{background:var(--negro-2);border-top:1px solid var(--linea);padding:var(--r-cab-arriba) 0 var(--r-cab-abajo)}
+#doc .sec-cab h2{margin:14px 0 0}
+#doc .sec-cab__q{margin:18px 0 0;max-width:52ch}
+#doc section[id^="s"] > .env{padding-top:var(--r-intro)}
+#doc section[id^="s"] > .env > *{margin-top:0;margin-bottom:0;padding-bottom:0}
+#doc section[id^="s"] > .env > * + *{margin-top:var(--r-bloques)}
+#doc section[id^="s"] > .env > :last-child{padding-bottom:120px}
+/* la frase clave y su párrafo, en una columna */
+#doc .intro{display:block;padding:0;max-width:760px}
+#doc .intro > *{margin:0}
+#doc .intro > * + *{margin-top:16px}
+#doc .intro > .nadie{margin-top:24px}
+#doc .versus > .intro{margin-bottom:32px}
+/* encabezado de bloque pegado a su contenido */
+#doc .tablero__cab{margin:0;padding:0 0 var(--r-cab-bloque)}
+#doc .conclu{margin:0;padding:22px 0 0;border-top:1px solid var(--linea-2);max-width:52ch}
+/* la columna derecha de una frase clave (rótulo + lista) va debajo, con aire */
+#doc .intro > div{margin-top:32px}
+/* filas de temas: la cifra centrada con su nombre */
+#doc .tema{align-items:center}
+/* el naranja no pinta texto: el encabezado de la columna «nueva» va en hueso */
+#doc .versus thead .h-so{color:var(--hueso)}
+
+/* ── Fondos: tres niveles para que se vea la diferencia entre dos cosas ──
+   negro = la página · gris = lo que hay hoy, lo de referencia, lo que queda pendiente
+   hueso (texto negro) = lo que se propone. El naranja nunca va de fondo. */
+:root{--fondo-gris:#1C1C1B}
+/* paneles */
+#doc .giro{border-top:0;align-items:stretch}
+#doc .giro__lado,#doc .existe .bloque,#doc .dos .bloque{padding:30px 32px 34px;border-top:0;background:var(--fondo-gris)}
+#doc .existe,#doc .dos{gap:16px}
+#doc .giro__lado h3,#doc .existe .bloque h3,#doc .dos .bloque h3{margin:14px 0 12px}
+/* el panel claro: el después del giro y lo que se propone en cada par */
+#doc .giro__lado--nuevo,#doc .existe .bloque:first-child{background:var(--hueso)}
+#doc .giro__lado--nuevo :is(h3,p,b,.rot),#doc .existe .bloque:first-child :is(h3,p,b,.rot){color:var(--negro)}
+#doc .giro__flecha{align-items:center;padding-top:0}
+/* tablas de comparación: la columna nueva, en hueso */
+#doc .versus :is(.h-so,.c-so,.c-nue){background:var(--hueso);color:var(--negro);padding-left:22px}
+#doc .versus thead .h-so{color:var(--negro)}
+#doc .versus :is(.c-so,.c-nue){border-bottom-color:rgba(14,14,14,.14)}
+#doc .versus :is(.c-so,.c-nue)::before{color:var(--negro)}
+@media(max-width:800px){
+  #doc .giro{gap:0}
+  #doc .giro__flecha{justify-content:center;padding:10px 0}
+  #doc .giro__lado,#doc .existe .bloque,#doc .dos .bloque{padding:24px 22px 28px}
+  #doc .versus :is(.c-so,.c-nue){padding:12px 16px;margin-bottom:10px}
+}
 </style>
 </head>
 <body>
@@ -974,7 +1056,7 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
   </div>
 </header>
 
-<main>
+<main id="doc">
 
 <section class="portada">
   <div class="portada__luz" aria-hidden="true"></div>
@@ -1042,27 +1124,26 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
   </div>
 </section>
 
-<section id="s02" class="s02-junta">
-  <div id="parte-1" class="s02-cab">
+<section id="s02">
+  <div class="sec-cab" id="parte-1">
     <div class="env">
       <span class="rot rot--nar">Parte 1 · Diagnóstico · 02</span>
       <h2>Situación actual</h2>
-      <p class="s02-cab__q">Dónde está hoy MIOMIO, qué tiene a favor y en qué contexto compite.</p>
+      <p class="sec-cab__q">Dónde está hoy MIOMIO, qué tiene a favor y en qué contexto compite.</p>
     </div>
   </div>
 
-  <div class="env s02-cuerpo">
-    <div class="s02-tesis">
-      <p class="s02-tesis__t">Una fábrica que nadie encuentra.</p>
-      <p class="s02-tesis__x">Ya produce y le vende por mayor a comercios de todo el país. Tiene planta,
+  <div class="env">
+    <div class="intro">
+      <p class="intro__lead">Una fábrica que nadie encuentra.</p>
+      <p class="intro__txt">Ya produce y le vende por mayor a comercios de todo el país. Tiene planta,
       depósito, clientes y catálogo. <b>Lo que no tiene es dónde mostrarlo.</b></p>
     </div>
 
-    <figure class="s02-bloque" aria-labelledby="tab-t">
-      <div class="s02-bloque__cab">
-        <span class="s02-n">1</span>
+    <figure class="tablero" aria-labelledby="tab-t">
+      <div class="tablero__cab">
         <h3 id="tab-t">Canal por canal</h3>
-        <span class="s02-fecha">Revisado el 25 de octubre de 2026</span>
+        <span>Revisado el 25 de octubre de 2026</span>
       </div>
       <div class="cols">
         <div class="col col--al">
@@ -1089,12 +1170,11 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
           </ul>
         </div>
       </div>
-      <p class="s02-conclu">El catálogo está armado. El que lo recibe y busca la marca no encuentra nada.</p>
+      <p class="conclu">El catálogo está armado. El que lo recibe y busca la marca no encuentra nada.</p>
     </figure>
 
-    <div class="s02-bloque">
-      <div class="s02-bloque__cab">
-        <span class="s02-n">2</span>
+    <div class="tablero">
+      <div class="tablero__cab">
         <h3>Al catálogo le falta justo lo que más les preguntan</h3>
       </div>
       <ol class="nadie">
@@ -1107,12 +1187,13 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
 </section>
 
 <section id="s03">
-  <div class="env">
-    <div class="tapa">
-      <span class="rot rot--nar">Parte 1 · 03</span>
+  <div class="sec-cab">
+    <div class="env">
+      <span class="rot rot--nar">Parte 1 · Diagnóstico · 03</span>
       <h2>Lo que ya tienen</h2>
     </div>
-
+  </div>
+  <div class="env">
     <div class="intro">
       <p class="intro__lead">Tres cosas que ya tienen <em>y otras fábricas no aprovechan.</em></p>
       <p class="intro__txt">Un producto que se entiende en un video, una planta que se puede filmar y comercios que ya lo venden.</p>
@@ -1170,8 +1251,8 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
       </li>
     </ol>
 
-    <figure class="versus tachar" style="margin-left:0;margin-right:0;margin-top:0;padding-bottom:110px">
-      <div class="intro" style="padding:0 0 40px">
+    <figure class="versus tachar">
+      <div class="intro">
         <p class="intro__lead">«Disponibilidad, calidad y precio» <em>lo dice cualquier proveedor.</em></p>
         <p class="intro__txt">Es lo que los diferencia, según ustedes. Por eso no alcanza con decirlo: hay que mostrarlo.</p>
       </div>
@@ -1189,12 +1270,13 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
 </section>
 
 <section id="s04">
-  <div class="env">
-    <div class="tapa">
-      <span class="rot rot--nar">Parte 1 · 04</span>
+  <div class="sec-cab">
+    <div class="env">
+      <span class="rot rot--nar">Parte 1 · Diagnóstico · 04</span>
       <h2>Contexto y FODA</h2>
     </div>
-
+  </div>
+  <div class="env">
     <div class="intro">
       <p class="intro__lead">El rival no es otra fábrica. <em>Es lo importado.</em></p>
       <div>
@@ -1208,7 +1290,7 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
     </div>
 
 
-    <div class="foda" style="margin-top:96px">
+    <div class="foda">
       <span class="foda__esq" aria-hidden="true"></span>
       <span class="rot foda__col" aria-hidden="true">A favor</span>
       <span class="rot rot--nar foda__col foda__col--neg" aria-hidden="true">En contra</span>
@@ -1260,7 +1342,7 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
       </div>
     </div>
 
-    <div class="existe" style="margin-top:0">
+    <div class="existe">
       <div class="bloque">
         <span class="rot">Fortaleza + oportunidad</span>
         <h3>Lo que hay que mostrar</h3>
@@ -1272,27 +1354,20 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
         <p>Un reel de un colador lo ve gente que quiere <b>un</b> colador. Sin una respuesta lista, la cuenta se llena de consultas que no venden.</p>
       </div>
     </div>
-
-    <div style="padding-bottom:110px"></div>
   </div>
 </section>
 
 <!-- ══════════ PARTE 2 · EL PLAN ══════════ -->
 
-<div class="parte-sep" id="parte-2">
-  <div class="env parte-sep__in">
-    <span class="rot rot--nar">Parte 2</span>
-    <p class="parte-sep__t">El plan</p>
-    <p class="parte-sep__q">A quién se le habla, con qué videos, cómo llega la consulta y cómo se mide.</p>
-  </div>
-</div>
-
-<section id="s05">  <div class="env">
-    <div class="tapa">
-      <span class="rot rot--nar">Parte 2 · 05</span>
+<section id="s05">
+  <div class="sec-cab" id="parte-2">
+    <div class="env">
+      <span class="rot rot--nar">Parte 2 · El plan · 05</span>
       <h2>A quién le hablamos</h2>
+      <p class="sec-cab__q">A quién se le habla, con qué videos, cómo llega la consulta y cómo se mide.</p>
     </div>
-
+  </div>
+  <div class="env">
     <div class="intro">
       <p class="intro__lead">La cuenta le habla <em>al comercio.</em></p>
       <p class="intro__txt">Se vende solo por mayor, así que cada video está pensado para quien compra para revender. El que usa los productos en su casa también va a mirar: suma alcance, pero no es a quien le apuntamos.</p>
@@ -1331,7 +1406,7 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
       </article>
     </div>
 
-    <div class="cruce" style="padding-bottom:110px">
+    <div class="cruce">
       <div class="cruce__ramas" aria-hidden="true"><i></i><i></i><i></i></div>
       <p class="cruce__txt">Los tres quieren ver lo mismo: <em>que hay stock y que llega.</em></p>
     </div>
@@ -1339,18 +1414,19 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
 </section>
 
 <section id="s06">
-  <div class="env">
-    <div class="tapa">
-      <span class="rot rot--nar">Parte 2 · 06</span>
+  <div class="sec-cab">
+    <div class="env">
+      <span class="rot rot--nar">Parte 2 · El plan · 06</span>
       <h2>El objetivo</h2>
     </div>
-
+  </div>
+  <div class="env">
     <div class="intro">
       <p class="intro__lead">No se mide en seguidores. <em>Se mide en comercios que escriben.</em></p>
       <p class="intro__txt">Es el cambio que ordena todo lo demás: qué se graba, cómo cierra cada video y qué se reporta a fin de mes.</p>
     </div>
 
-    <div class="giro" style="margin-top:56px">
+    <div class="giro">
       <div class="giro__lado giro__lado--antes" style="--q:0">
         <span class="rot">Lo que pidieron</span>
         <h3>Dar a conocer la marca.</h3>
@@ -1366,7 +1442,7 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
       </div>
     </div>
 
-    <figure class="versus s07-cambia" aria-labelledby="cb-t" style="padding-bottom:110px">
+    <figure class="versus s07-cambia" aria-labelledby="cb-t">
       <div class="tablero__cab">
         <h3 id="cb-t">Qué cambia con eso</h3>
       </div>
@@ -1386,12 +1462,13 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
 </section>
 
 <section id="s07">
-  <div class="env">
-    <div class="tapa">
-      <span class="rot rot--nar">Parte 2 · 07</span>
+  <div class="sec-cab">
+    <div class="env">
+      <span class="rot rot--nar">Parte 2 · El plan · 07</span>
       <h2>Videos que funcionan</h2>
     </div>
-
+  </div>
+  <div class="env">
     <div class="intro">
       <p class="intro__lead">Ocho videos de cinco cuentas. <em>Debajo de cada uno, qué se toma para MIOMIO.</em></p>
       <p class="intro__txt">Rodo vende electrodomésticos; Cerri y Pontevedra son fábricas de plástico; Cintek, de metal; Microbottles, de envases. Ninguna se copia entera: se toma la mecánica.</p>
@@ -1455,7 +1532,7 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
       </ol>
     </figure>
 
-    <figure class="versus" aria-labelledby="ad-t" style="padding-bottom:110px">
+    <figure class="versus" aria-labelledby="ad-t">
       <div class="tablero__cab">
         <h3 id="ad-t">Cómo se aplica a MIOMIO</h3>
         <span>Lo que se repite en los que rinden.</span>
@@ -1477,12 +1554,13 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
 </section>
 
 <section id="s08">
-  <div class="env">
-    <div class="tapa">
-      <span class="rot rot--nar">Parte 2 · 08</span>
+  <div class="sec-cab">
+    <div class="env">
+      <span class="rot rot--nar">Parte 2 · El plan · 08</span>
       <h2>Contenido</h2>
     </div>
-
+  </div>
+  <div class="env">
     <div class="intro">
       <p class="intro__lead">Cinco temas y seis formatos. <em>Todo sale de la planta y el depósito.</em></p>
       <p class="intro__txt">Nada de fotos generadas ni renders: cada pieza muestra algo real.</p>
@@ -1505,7 +1583,7 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
       </ol>
     </figure>
 
-    <figure class="fig tabla" aria-labelledby="fm-t" style="padding-bottom:110px">
+    <figure class="fig tabla" aria-labelledby="fm-t">
       <div class="tablero__cab">
         <h3 id="fm-t">Los seis formatos</h3>
         <span>Uno por semana. El primer mes salen del 01 al 04.</span>
@@ -1527,12 +1605,13 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
 </section>
 
 <section id="s09">
-  <div class="env">
-    <div class="tapa">
-      <span class="rot rot--nar">Parte 2 · 09</span>
+  <div class="sec-cab">
+    <div class="env">
+      <span class="rot rot--nar">Parte 2 · El plan · 09</span>
       <h2>Cómo llegan las consultas</h2>
     </div>
-
+  </div>
+  <div class="env">
     <div class="intro">
       <p class="intro__lead">Del video al pedido, <em>todo termina en el WhatsApp de Diego.</em></p>
       <p class="intro__txt">Es el embudo de venta en tres partes. <b>TOFU</b> (arriba): el comercio que todavía no conoce a MIOMIO. <b>MOFU</b> (el medio): el que ya la vio y está viendo si es un proveedor serio. <b>BOFU</b> (abajo): el que necesita surtido y está listo para pedir. Cada video apunta a una etapa y pide una sola cosa.</p>
@@ -1562,12 +1641,12 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
       </ol>
     </figure>
 
-    <div class="decision" style="padding-bottom:110px">
+    <div class="decision">
       <div>
         <span class="rot rot--nar">La respuesta, automática</span>
         <h3>El catálogo y tres preguntas</h3>
         <p>El que comenta CATÁLOGO o escribe recibe el PDF y tres preguntas. Diego retoma con la consulta ya ordenada.</p>
-        <p style="margin-top:14px">Y el que quiere comprar de a uno recibe otra respuesta. A dónde lo mandamos lo definimos con ustedes.</p>
+        <p>Y el que quiere comprar de a uno recibe otra respuesta. A dónde lo mandamos lo definimos con ustedes.</p>
       </div>
       <figure class="chat" aria-label="Ejemplo de la primera respuesta del WhatsApp de MIOMIO">
         <div class="chat__cab"><i aria-hidden="true"></i><div><b>MIOMIO</b><span>WhatsApp Business · respuesta automática</span></div></div>
@@ -1587,18 +1666,19 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
 </section>
 
 <section id="s10">
-  <div class="env">
-    <div class="tapa">
-      <span class="rot rot--nar">Parte 2 · 10</span>
+  <div class="sec-cab">
+    <div class="env">
+      <span class="rot rot--nar">Parte 2 · El plan · 10</span>
       <h2>Perfil</h2>
     </div>
-
+  </div>
+  <div class="env">
     <div class="intro">
       <p class="intro__lead">Tres líneas y una acción. <em>Así se vería.</em></p>
       <p class="intro__txt">El comerciante que llega desde el catálogo tiene que entender en cinco segundos qué hacen y cómo se compra. Armado con lo que funciona en Cerri, Pontevedra y Colombraro.</p>
     </div>
 
-    <div class="perfil" style="padding-bottom:110px">
+    <div class="perfil">
       <figure class="ig" aria-label="Cómo se vería el perfil de Instagram de MIOMIO">
         <div class="ig__cab">
           <span class="ig__ava" aria-hidden="true">MIOMIO</span>
@@ -1633,25 +1713,26 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
           <li><b>Destacadas</b><span>Primero cómo se compra y el catálogo. Después las cuatro secciones del catálogo, por ambiente como Colombraro. Al final la fábrica, los envíos y dónde está MIOMIO.</span></li>
           <li><b>Portadas</b><span>Un ícono de línea sobre el color de la marca, todas iguales. El color sale de la identidad visual.</span></li>
         </ol>
-        <p class="sitio__nota" style="margin-top:22px">El nombre de usuario lo definimos con ustedes.</p>
+        <p class="sitio__nota">El nombre de usuario lo definimos con ustedes.</p>
       </div>
     </div>
   </div>
 </section>
 
 <section id="s11">
-  <div class="env">
-    <div class="tapa">
-      <span class="rot rot--nar">Parte 2 · 11</span>
+  <div class="sec-cab">
+    <div class="env">
+      <span class="rot rot--nar">Parte 2 · El plan · 11</span>
       <h2>Producción</h2>
     </div>
-
+  </div>
+  <div class="env">
     <div class="intro">
       <p class="intro__lead">Un reel por semana. <em>Los cuatro del mes salen de una sola jornada.</em></p>
       <p class="intro__txt">Grabo en la planta y el depósito. Si no tienen a alguien para grabar, lo consigo yo.</p>
     </div>
 
-    <figure class="fig tabla semanas" aria-labelledby="sm-t" style="padding-bottom:110px">
+    <figure class="fig tabla semanas" aria-labelledby="sm-t">
       <div class="tablero__cab">
         <h3 id="sm-t">Un mes de publicaciones</h3>
         <span>El primer mes. Desde el segundo se suman el 05 y el 06.</span>
@@ -1669,12 +1750,13 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
 </section>
 
 <section id="s12">
-  <div class="env">
-    <div class="tapa">
-      <span class="rot rot--nar">Parte 2 · 12</span>
+  <div class="sec-cab">
+    <div class="env">
+      <span class="rot rot--nar">Parte 2 · El plan · 12</span>
       <h2>Medición</h2>
     </div>
-
+  </div>
+  <div class="env">
     <div class="intro">
       <p class="intro__lead">Cinco números. <em>El que manda es el primero.</em></p>
       <p class="intro__txt">Hoy no se registra ninguno: arrancamos de cero y el primer informe llega a fin del mes 1.</p>
@@ -1695,7 +1777,7 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
       </ol>
     </figure>
 
-    <div class="dos aparece" style="padding-bottom:110px">
+    <div class="dos aparece">
       <div class="bloque">
         <span class="rot">Por qué no encabezan los seguidores</span>
         <h3>Un bazar que escribe pesa más que mil me gusta</h3>
@@ -1711,17 +1793,18 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
 </section>
 
 <section id="s13">
-  <div class="env">
-    <div class="tapa">
-      <span class="rot rot--nar">Parte 2 · 13</span>
+  <div class="sec-cab">
+    <div class="env">
+      <span class="rot rot--nar">Parte 2 · El plan · 13</span>
       <h2>Próximos pasos</h2>
     </div>
-
+  </div>
+  <div class="env">
     <div class="intro">
       <p class="intro__lead">Quién hace qué, <em>y qué necesito para arrancar.</em></p>
       <p class="intro__txt">Lo que hago yo, lo que queda de su lado y las seis respuestas que faltan.</p>
     </div>
-    <div class="existe" style="margin-top:56px">
+    <div class="existe">
       <div class="bloque">
         <span class="rot">Lo que hago yo</span>
         <h3>Todo, de la estrategia a la publicación</h3>
@@ -1734,7 +1817,7 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
       </div>
     </div>
 
-    <div class="intro" style="padding:110px 0 110px">
+    <div class="intro">
       <p class="intro__lead">Para arrancar, <em>necesito que me confirmen.</em></p>
       <ol class="nadie">
         <li><span><b>¿Siguen haciendo algo a medida, o importando y exportando?</b></span></li>
