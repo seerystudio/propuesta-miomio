@@ -1,0 +1,1827 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Propuesta de contenido · MIOMIO</title>
+<meta name="theme-color" content="#0E0E0E">
+<meta name="robots" content="noindex, nofollow">
+
+
+<style>
+@font-face{font-family:'Inter';src:url(assets/inter.woff2) format('woff2');font-weight:100 900;font-display:swap;font-style:normal}
+@font-face{font-family:'Inter Tight';src:url(assets/intertight.woff2) format('woff2');font-weight:100 900;font-display:swap;font-style:normal}
+
+:root{
+  --negro:#0E0E0E; --negro-2:#141414;
+  --hueso:#F5F4F2; --gris:#A2A29E; --gris-2:#807F79;
+  --naranja:#FF4D00;
+  --linea:rgba(255,255,255,.11); --linea-2:rgba(255,255,255,.2);
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --tit:'Inter Tight','Inter',system-ui,sans-serif;
+  --ancho:1280px;
+  --sal:cubic-bezier(.23,1,.32,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--negro);color:var(--hueso);font-family:var(--sans);font-size:17px;line-height:1.6;letter-spacing:-.011em;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+::selection{background:var(--naranja);color:#fff}
+:focus-visible{outline:2px solid var(--naranja);outline-offset:3px}
+.env{width:100%;max-width:var(--ancho);margin:0 auto;padding:0 26px}
+
+/* ══════════ BARRA ══════════ */
+.barra{position:fixed;top:0;left:0;right:0;z-index:90;background:rgba(14,14,14,.88);backdrop-filter:blur(14px) saturate(150%);border-bottom:1px solid transparent;transition:border-color .3s ease}
+.barra[data-fija]{border-bottom-color:var(--linea)}
+.barra__in{max-width:var(--ancho);margin:0 auto;padding:13px 26px;display:flex;align-items:center;gap:24px;min-height:56px}
+.marca{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--tit);font-weight:700;font-size:16px;letter-spacing:-.03em;white-space:nowrap}
+.marca i{width:8px;height:8px;background:var(--naranja);flex:none;display:block}
+.barra__doc{margin-left:auto;font-size:11.5px;font-weight:500;letter-spacing:.11em;text-transform:uppercase;color:var(--hueso);white-space:nowrap}
+.barra[data-fija] .barra__doc{display:none}
+@media(max-width:720px){.barra__doc .ancho{display:none}}
+.avance{margin-left:auto;display:none;align-items:flex-end;gap:14px}
+.barra[data-fija] .avance{display:flex}
+.grupo{display:flex;align-items:flex-end;gap:3px;position:relative;padding-bottom:13px;min-width:88px}
+.grupo::after{content:attr(data-rot);position:absolute;left:0;bottom:0;font-size:9px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--hueso);white-space:nowrap}
+.grupo i{width:3px;height:17px;background:var(--linea-2);display:block;transform:scaleY(.765);transform-origin:50% 100%;transition:background .25s ease,transform .25s var(--sal)}
+.grupo i.on{background:var(--naranja);transform:scaleY(1)}
+@media(max-width:760px){.avance{gap:0;flex:1;max-width:190px}.grupo{padding-bottom:0;gap:2px;min-width:0}.grupo::after{display:none}.grupo i{width:2px;height:12px}}
+
+/* ══════════ 01 · PORTADA ══════════ */
+.portada{min-height:100svh;display:flex;flex-direction:column;justify-content:center;gap:clamp(30px,4.4vh,58px);padding:100px 0 8px;position:relative;overflow:hidden}
+.portada__luz{position:absolute;left:-4%;top:-26%;width:min(1050px,115vw);aspect-ratio:1.4;background:radial-gradient(ellipse at 45% 45%,rgba(255,77,0,.15),rgba(255,77,0,.035) 45%,transparent 70%);filter:blur(9px);pointer-events:none}
+.rotulo{display:flex;align-items:center;gap:11px;margin:0 0 22px;flex-wrap:wrap;font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--hueso)}
+.rotulo::before{content:"";width:26px;height:1px;background:var(--naranja);flex:none}
+h1{font-family:var(--tit);font-weight:800;font-size:clamp(48px,8.6vw,120px);line-height:.9;letter-spacing:-.05em;margin:0}
+.para{margin:14px 0 0;font-family:var(--tit);font-weight:400;font-size:clamp(19px,2.1vw,28px);letter-spacing:-.03em;line-height:1.15;color:var(--hueso)}
+.para b{color:var(--hueso);font-weight:800}
+.bajada{margin:26px 0 0;max-width:64ch;color:var(--hueso);font-size:clamp(16px,1.3vw,18.5px);line-height:1.56;font-weight:300}
+
+.mapa{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--linea)}
+.acto{padding:22px 30px 4px 0;border-right:1px solid var(--linea);min-width:0}
+.acto + .acto{padding-left:30px}
+.acto:last-child{border-right:0;padding-right:0}
+.acto__num{display:flex;align-items:baseline;gap:10px;margin:0 0 14px;font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--hueso)}
+.acto__num b{color:var(--hueso);font-weight:700}
+.tics{display:flex;align-items:flex-end;gap:5px;height:30px;margin:0 0 16px}
+.tics i{width:4px;height:30px;display:block;transform-origin:50% 100%}
+.acto--1 .tics i{background:rgba(245,244,242,.72)}
+.acto--2 .tics i{background:rgba(245,244,242,.42)}
+.acto h2{font-family:var(--tit);font-weight:800;font-size:clamp(24px,2.4vw,32px);letter-spacing:-.038em;line-height:1;margin:0 0 9px}
+.acto__q{margin:0 0 12px;color:var(--naranja);font-size:15px;font-weight:600;letter-spacing:-.014em;line-height:1.3}
+.acto__hay{margin:0;color:var(--hueso);font-size:13.5px;line-height:1.5;font-weight:300}
+@media(max-width:900px){.mapa{grid-template-columns:1fr}.acto,.acto + .acto{border-right:0;border-bottom:1px solid var(--linea);padding:18px 0}.acto:last-child{border-bottom:0}}
+
+.datos{margin:0;display:flex;flex-wrap:wrap;gap:0 34px;border-top:1px solid var(--linea);padding-top:14px;align-items:center}
+.dato{display:flex;align-items:baseline;gap:8px;padding:5px 0;min-width:0}
+.dato dt{font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--hueso);margin:0;white-space:nowrap}
+.dato dd{margin:0;font-size:13.5px;font-weight:600;letter-spacing:-.012em;white-space:nowrap}
+.bajar{margin-left:auto;display:inline-flex;align-items:center;gap:9px;text-decoration:none;background:var(--naranja);color:#fff;padding:12px 20px;min-height:44px;border-radius:100px;font-size:14px;font-weight:600;letter-spacing:-.012em;transition:transform .16s var(--sal),background .2s ease}
+@media(hover:hover) and (pointer:fine){.bajar:hover{background:#FF6224}}
+.bajar:active{transform:scale(.97)}
+.bajar:focus-visible{outline:2px solid var(--hueso);outline-offset:3px}
+@media(max-width:700px){.env,.barra__in{padding:0 20px}.barra__in{padding-top:13px;padding-bottom:13px}.datos{gap:0 22px}.bajar{margin:14px 0 0;width:100%;justify-content:space-between}}
+
+@keyframes crece{from{transform:scaleY(.06);opacity:0}to{transform:scaleY(1);opacity:1}}
+@keyframes suave{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.tics i{animation:crece .42s var(--sal) both;animation-delay:calc(var(--i) * 30ms + .45s)}
+.rotulo,h1,.para,.bajada{animation:suave .62s var(--sal) both}
+h1{animation-delay:.05s}.para{animation-delay:.11s}.bajada{animation-delay:.17s}
+.acto__num,.acto h2,.acto__q,.acto__hay{animation:suave .5s var(--sal) .38s both}
+.datos{animation:suave .5s var(--sal) 1.05s both}
+
+/* ══════════ 02 · SITUACIÓN ACTUAL ══════════ */
+.rot{font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--hueso)}
+.rot--nar{color:var(--naranja);font-weight:600}
+.tapa{min-height:52vh;display:flex;flex-direction:column;justify-content:flex-end;padding:96px 0 40px;border-top:1px solid var(--linea);border-bottom:1px solid var(--linea-2)}
+.tapa h2{font-family:var(--tit);font-weight:600;letter-spacing:-.048em;font-size:clamp(44px,7vw,92px);line-height:.9;margin:18px 0 0}
+.texto{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 48px;padding:40px 0 8px}
+.texto p{margin:0;color:var(--hueso);font-size:17px;line-height:1.65;max-width:56ch}
+.texto p b{color:var(--hueso);font-weight:600}
+
+/* el tablero: cada canal, en la columna de su estado */
+.tablero{margin:52px 0 0}
+.tablero__cab{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-bottom:14px}
+.tablero__cab h3{margin:0;font-family:var(--tit);font-weight:600;letter-spacing:-.035em;font-size:clamp(22px,2.6vw,30px);line-height:1.1}
+.tablero__cab span{font-size:14px;color:var(--hueso);font-weight:300}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--linea-2)}
+.col{padding:20px 28px 26px 0;border-right:1px solid var(--linea);min-width:0}
+.col + .col{padding-left:28px}
+.col:last-child{border-right:0;padding-right:0}
+.col__n{display:block;font-family:var(--tit);font-weight:600;letter-spacing:-.05em;font-size:clamp(44px,5vw,64px);line-height:.9;margin:12px 0 18px}
+.col--al .col__n{color:var(--hueso);font-weight:200}
+.col--atras .col__n{color:var(--hueso)}
+.col--no .col__n{color:var(--naranja)}
+.canales{margin:0;padding:0;list-style:none;border-top:1px solid var(--linea)}
+.canales li{display:flex;flex-direction:column;padding:11px 0;border-bottom:1px solid var(--linea)}
+.canales b{font-weight:600;font-size:15.5px;letter-spacing:-.015em}
+.canales span{font-size:14px;color:var(--hueso);line-height:1.45;font-weight:300}
+.col--no .canales b::before{content:"";display:inline-block;width:7px;height:7px;background:var(--naranja);margin:0 9px 2px 0;vertical-align:middle}
+.col--atras .canales b::before{content:"";display:inline-block;width:7px;height:7px;box-shadow:inset 0 0 0 1.5px var(--hueso);margin:0 9px 2px 0;vertical-align:middle}
+.vacio{padding:11px 0;font-size:15px;color:var(--hueso);border-bottom:1px solid var(--linea);font-weight:300}
+.remate{margin:36px 0 0;padding-bottom:110px;font-family:var(--tit);font-weight:600;letter-spacing:-.03em;font-size:clamp(20px,2.2vw,26px);line-height:1.25;max-width:40ch}
+
+@media(max-width:1000px){.tapa{min-height:0;padding:80px 0 34px}.texto{grid-template-columns:minmax(0,1fr);gap:18px 0}}
+@media(max-width:800px){.cols{grid-template-columns:minmax(0,1fr)}.col,.col + .col{border-right:0;padding:18px 0 22px;border-bottom:1px solid var(--linea)}.col:last-child{border-bottom:0}.col__n{margin:8px 0 12px}}
+
+/* ══════════ 03 · LOS ACTIVOS QUE YA EXISTEN ══════════ */
+/* intro: la frase a la izquierda, el índice de las cinco fichas a la derecha */
+.s03-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 48px;padding:40px 0 0;align-items:start}
+.s03-intro__lead{margin:0;font-family:var(--tit);font-weight:600;letter-spacing:-.035em;font-size:clamp(24px,2.8vw,36px);line-height:1.12;max-width:20ch}
+.indice{margin:0;padding:0;list-style:none;border-top:1px solid var(--linea)}
+.indice a{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:0 12px;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--linea);text-decoration:none;font-size:15px;font-weight:600;letter-spacing:-.015em;transition:color .2s ease}
+.indice a span{font-size:10px;font-weight:300;letter-spacing:.15em;color:var(--hueso)}
+.indice a::after{content:"\2193";color:var(--hueso);font-weight:300;transition:transform .2s var(--sal),color .2s ease}
+@media(hover:hover) and (pointer:fine){.indice a:hover{color:var(--naranja)}.indice a:hover::after{color:var(--naranja);transform:translateY(2px)}}
+
+/* las fichas: título y texto a la izquierda, la prueba a la derecha */
+.fichas{margin:56px 0 0;padding:0 0 110px;list-style:none}
+.ficha{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:0 64px;padding:44px 0 52px;border-top:1px solid var(--linea-2);scroll-margin-top:72px}
+.ficha__id{margin:0 0 20px}
+.ficha h3{margin:0 0 18px;font-family:var(--tit);font-weight:600;letter-spacing:-.045em;font-size:clamp(30px,3.6vw,48px);line-height:.98;max-width:14ch;text-wrap:balance}
+.s03-intro__lead,.cartera li{text-wrap:balance}
+.ficha p{margin:0;color:var(--hueso);font-size:16.5px;line-height:1.62;max-width:46ch}
+.prueba{margin:0;min-width:0;padding-left:40px;border-left:1px solid var(--linea)}
+.prueba > .rot{display:block;margin-bottom:28px}
+
+/* 1 · la cadena, sin intermediarios */
+.cadena{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));position:relative}
+.cadena::before{content:"";position:absolute;top:5px;left:6px;width:66.667%;height:2px;background:var(--naranja);transform-origin:0 50%}
+.cadena li{position:relative;padding:34px 12px 0 0}
+.cadena li::before{content:"";position:absolute;top:0;left:0;width:12px;height:12px;background:var(--naranja)}
+.cadena b{display:block;font-family:var(--tit);font-weight:600;letter-spacing:-.04em;font-size:clamp(24px,2.5vw,34px);line-height:1}
+.cadena span{display:block;margin-top:8px;font-size:14.5px;color:var(--hueso);line-height:1.4;font-weight:300}
+.sin{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 26px;margin:40px 0 0;padding-top:16px;border-top:1px solid var(--linea)}
+.sin s{font-size:15px;color:var(--hueso);text-decoration-color:var(--naranja);text-decoration-thickness:1.5px;font-weight:300}
+
+/* 2 · el año y las seis generaciones */
+.anio{display:block;font-family:var(--tit);font-weight:600;letter-spacing:-.065em;font-size:clamp(88px,12vw,176px);line-height:.8;margin:0 0 30px}
+.gen{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;margin:0;padding:0;list-style:none}
+.gen li{display:flex;flex-direction:column;gap:9px;font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--hueso)}
+.gen li::before{content:"";height:10px;background:rgba(245,244,242,.5);transform-origin:50% 100%}
+.gen li:last-child{color:var(--naranja);font-weight:700}
+.gen li:last-child::before{background:var(--naranja)}
+
+/* 3 · la cartera, compuesta */
+.cartera{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px;border-top:1px solid var(--linea)}
+.cartera li{padding:13px 0;border-bottom:1px solid var(--linea);font-family:var(--tit);font-weight:600;letter-spacing:-.03em;font-size:clamp(19px,2vw,26px);line-height:1.15}
+.cartera .mas{color:var(--hueso);font-weight:300}
+
+/* 4 · el mapa */
+.obra svg{display:block;width:100%;max-width:520px;height:auto}
+.obra__ley{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:14px;font-size:13px;color:var(--hueso);font-weight:300}
+.obra__ley span{display:inline-flex;align-items:center;gap:8px}
+.obra__ley i{width:8px;height:8px;border-radius:50%;display:block}
+.obra__ley .l-obra{background:var(--naranja)}
+.obra__ley .l-sede{box-shadow:inset 0 0 0 1.5px var(--hueso)}
+.ar-tierra{fill:rgba(245,244,242,.05);stroke:rgba(245,244,242,.34);stroke-width:.8;stroke-linejoin:round}
+.ar-guia path{fill:none;stroke:rgba(245,244,242,.3);stroke-width:.6}
+.ar-obra{fill:var(--naranja)}
+.ar-sede{fill:var(--negro);stroke:var(--hueso);stroke-width:1.2}
+.ar-et text{fill:var(--hueso);font-family:var(--sans);font-size:11.5px;font-weight:600;letter-spacing:-.01em}
+.ar-et .ar-et--sede{fill:var(--hueso);font-weight:300}
+/* entrada: la cadena se traza, las generaciones crecen, los puntos aparecen */
+html.js .cadena::before{transform:scaleX(0);transition:transform .9s var(--sal) .2s}
+html.js .cadena li::before{opacity:0;transform:scale(.4);transition:opacity .3s ease,transform .45s var(--sal)}
+html.js .cadena li:nth-child(2)::before{transition-delay:.5s}
+html.js .cadena li:nth-child(3)::before{transition-delay:.9s}
+html.js .gen li::before{opacity:.15;transform:scaleY(.1);transition:opacity .45s ease,transform .5s var(--sal);transition-delay:calc(var(--i) * 80ms + .1s)}
+html.js .ar-obra{opacity:0;transition:opacity .45s ease .2s}
+html.js .ficha.visto .cadena::before,html.js .ficha.visto .cadena li::before,html.js .ficha.visto .gen li::before{opacity:1;transform:none}
+html.js .ficha.visto .ar-obra{opacity:1}
+@media(prefers-reduced-motion:reduce){html.js .cadena::before,html.js .cadena li::before,html.js .gen li::before,html.js .ar-obra{opacity:1;transform:none;transition:none}}
+@media print{html.js .cadena::before,html.js .cadena li::before,html.js .gen li::before,html.js .ar-obra{opacity:1;transform:none}}
+
+@media(max-width:1000px){
+  .s03-intro{grid-template-columns:minmax(0,1fr);gap:28px 0}
+  .ficha{grid-template-columns:minmax(0,1fr);gap:30px 0;padding:34px 0 42px}
+  .prueba{padding-left:0;border-left:0}
+}
+@media(max-width:700px){.ar-et text{font-size:13.5px}}
+@media(max-width:560px){.cadena b{font-size:21px}.cartera{grid-template-columns:minmax(0,1fr)}.gen li{font-size:9px;letter-spacing:.08em}}
+
+/* ══════════ 04 · COMPETENCIA ══════════ */
+/* intro: el título a la izquierda, lo que nadie hace a la derecha */
+.s04-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 48px;padding:40px 0 0;align-items:start}
+.s04-intro__lead{margin:0;font-family:var(--tit);font-weight:600;letter-spacing:-.035em;font-size:clamp(24px,2.8vw,36px);line-height:1.12;max-width:20ch;text-wrap:balance}
+.s04-intro .rot{display:block;margin-bottom:14px}
+.nadie{margin:0;padding:0;list-style:none;border-top:1px solid var(--linea);counter-reset:n}
+.nadie li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:0 12px;padding:14px 0;border-bottom:1px solid var(--linea);font-size:16px;line-height:1.5;color:var(--hueso);counter-increment:n}
+.nadie li::before{content:counter(n);padding-top:5px;font-size:10px;font-weight:700;letter-spacing:.15em;color:var(--naranja)}
+.nadie b{color:var(--hueso);font-weight:600}
+
+/* lo que sí existe: dos bloques */
+.existe{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 64px;margin:72px 0 0}
+.bloque{padding:26px 0 0;border-top:1px solid var(--linea-2)}
+.bloque h3{margin:16px 0 14px;font-family:var(--tit);font-weight:600;letter-spacing:-.04em;font-size:clamp(26px,3vw,40px);line-height:1;max-width:16ch;text-wrap:balance}
+.bloque p{margin:0;color:var(--hueso);font-size:16.5px;line-height:1.62;max-width:46ch}
+
+/* la tabla: Chamtac y Solmi, lado a lado */
+figure.versus{margin:64px 0 0}
+.versus table{width:100%;border-collapse:collapse;table-layout:fixed;border-top:1px solid var(--linea-2)}
+.versus .c1{width:21%}
+.versus th,.versus td{padding:17px 28px 17px 0;border-bottom:1px solid var(--linea);text-align:left;vertical-align:top;font-weight:400}
+.versus thead th{padding:18px 28px 14px 0;border-bottom:1px solid var(--linea-2);font-family:var(--tit);font-weight:600;letter-spacing:-.035em;font-size:clamp(20px,2.2vw,28px);line-height:1}
+.versus thead .h-so{color:var(--naranja)}
+.versus tbody th{padding-top:21px;font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--hueso)}
+.versus td{font-size:16px;line-height:1.45}
+.versus .c-ch{color:var(--hueso);font-weight:600;letter-spacing:-.015em}
+.versus .c-so{color:var(--hueso);font-weight:300}
+.versus .c-so span{display:block;position:relative;padding-left:17px}
+.versus .c-so span::before{content:"";position:absolute;left:0;top:.5em;width:7px;height:7px;background:var(--naranja)}
+.remate em{font-style:normal;color:var(--naranja)}
+.a11y{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* entrada: las filas aparecen una detrás de otra */
+html.js .versus tbody tr{opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .5s var(--sal);transition-delay:calc(var(--i) * 90ms + .1s)}
+html.js .versus.visto tbody tr{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html.js .versus tbody tr{opacity:1;transform:none;transition:none}}
+@media print{html.js .versus tbody tr{opacity:1;transform:none}.nadie li,.bloque p,.versus .c-ch{color:#111}}
+
+@media(max-width:1000px){
+  .s04-intro{grid-template-columns:minmax(0,1fr);gap:28px 0}
+  .existe{grid-template-columns:minmax(0,1fr);gap:40px 0;margin-top:56px}
+}
+@media(max-width:760px){
+  .versus thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .versus table,.versus tbody,.versus tr,.versus th,.versus td{display:block;width:auto}
+  .versus tr{padding:16px 0 8px;border-bottom:1px solid var(--linea)}
+  .versus th,.versus td{border:0;padding:0 0 10px}
+  .versus tbody th{padding:0 0 12px}
+  .versus td::before{content:attr(data-col);display:block;margin-bottom:3px;font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--hueso)}
+  .versus .c-so::before{color:var(--naranja)}
+}
+
+/* ══════════ 05 · ANÁLISIS FODA ══════════ */
+/* la matriz: interno/externo × a favor/en contra; lo que está en contra, en naranja */
+.foda{display:grid;grid-template-columns:72px minmax(0,1fr) minmax(0,1fr);margin:40px 0 0;padding-bottom:110px}
+.foda__col{padding:0 0 14px}
+.foda__col--neg{padding-left:40px}
+.foda__fila{padding-top:30px;border-top:1px solid var(--linea-2)}
+.foda__fila span{display:inline-block;writing-mode:vertical-rl;transform:rotate(180deg)}
+.cuad{min-width:0;padding:28px 40px 40px 0;border-top:1px solid var(--linea-2)}
+.cuad--neg{padding:28px 0 40px 40px;border-left:1px solid var(--linea)}
+.cuad__eje{display:none}
+.cuad__cab{display:flex;align-items:flex-end;gap:14px;margin:0 0 22px}
+.cuad__letra{font-family:var(--tit);font-weight:600;letter-spacing:-.06em;font-size:clamp(56px,6vw,84px);line-height:.78;color:var(--hueso)}
+.cuad--neg .cuad__letra{color:var(--naranja)}
+.cuad h3{margin:0;font-family:var(--tit);font-weight:600;letter-spacing:-.035em;font-size:clamp(22px,2.4vw,30px);line-height:1}
+.cuad__n{margin-left:auto;font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--hueso)}
+.cuad ul{margin:0;padding:0;list-style:none;border-top:1px solid var(--linea)}
+.cuad li{position:relative;padding:11px 0 11px 19px;border-bottom:1px solid var(--linea);font-size:16px;line-height:1.45;color:var(--hueso)}
+.cuad li::before{content:"";position:absolute;left:0;top:19px;width:7px;height:7px;box-shadow:inset 0 0 0 1.5px var(--hueso)}
+.cuad--neg li::before{box-shadow:none;background:var(--naranja)}
+
+/* entrada: los cuadrantes aparecen en orden de lectura */
+html.js .cuad{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .55s var(--sal);transition-delay:calc(var(--q) * 110ms + .1s)}
+html.js .foda.visto .cuad{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html.js .cuad{opacity:1;transform:none;transition:none}}
+@media print{html.js .cuad{opacity:1;transform:none}.cuad li{color:#111}}
+
+@media(max-width:900px){
+  .foda{grid-template-columns:minmax(0,1fr);margin-top:0}
+  .foda > .cuad:first-of-type{border-top:0}
+  .foda__esq,.foda__col,.foda__fila{display:none}
+  .cuad,.cuad--neg{padding:26px 0 34px;border-left:0}
+  .cuad__eje{display:block;margin:0 0 16px}
+}
+
+/* ══════════ 06 · A QUIÉN LE HABLAMOS ══════════ */
+.s06-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 48px;padding:40px 0 0;align-items:start}
+.s06-intro__lead{margin:0;font-family:var(--tit);font-weight:600;letter-spacing:-.035em;font-size:clamp(24px,2.8vw,36px);line-height:1.12;max-width:20ch;text-wrap:balance}
+.s06-intro__txt{margin:0;color:var(--hueso);font-size:16.5px;line-height:1.62;max-width:46ch}
+
+/* las tres personas, en columnas: nombre, situación y las tres respuestas */
+.personas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:64px 0 0;border-top:1px solid var(--linea-2)}
+.persona{padding:26px 28px 34px 0;border-right:1px solid var(--linea);min-width:0}
+.persona + .persona{padding-left:28px}
+.persona:last-child{border-right:0;padding-right:0}
+.persona__tipo{display:flex;flex-wrap:wrap;gap:4px 12px;margin:0 0 22px}
+.persona h3{margin:0;font-family:var(--tit);font-weight:600;letter-spacing:-.05em;font-size:clamp(44px,5vw,64px);line-height:.9}
+.persona__rol{margin:10px 0 0;font-size:14px;color:var(--hueso);font-weight:300}
+.persona__sit{margin:22px 0 0;font-family:var(--tit);font-weight:600;letter-spacing:-.025em;font-size:clamp(18px,1.7vw,21px);line-height:1.3;text-wrap:pretty}
+.persona dl{margin:26px 0 0;border-top:1px solid var(--linea)}
+.persona dl div{padding:12px 0;border-bottom:1px solid var(--linea)}
+.persona dt{margin:0 0 4px;font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--hueso)}
+.persona dd{margin:0;font-size:15.5px;line-height:1.5;color:var(--hueso)}
+.palabras{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 16px}
+.palabras b{font-family:var(--tit);font-weight:600;letter-spacing:-.03em;font-size:20px;color:var(--hueso)}
+.palabras s{font-size:15px;color:var(--hueso);text-decoration-color:var(--naranja);text-decoration-thickness:1.5px;font-weight:300}
+
+/* el cruce: una rama baja de cada persona y las une en una sola frase */
+.cruce__ramas{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));height:40px}
+.cruce__ramas i{display:block;border-left:2px solid var(--naranja)}
+.cruce__ramas i + i{margin-left:28px}
+.cruce__ramas::after{content:"";position:absolute;left:0;bottom:0;width:calc(66.667% + 30px);height:2px;background:var(--naranja);transform-origin:0 50%}
+.cruce__txt{margin:24px 0 0;font-family:var(--tit);font-weight:600;letter-spacing:-.035em;font-size:clamp(26px,3.2vw,42px);line-height:1.08;max-width:24ch;text-wrap:balance}
+.cruce__txt em{font-style:normal;color:var(--naranja)}
+.cruce__sub{margin:14px 0 0;color:var(--hueso);font-size:17px;line-height:1.5;max-width:52ch;font-weight:300}
+
+/* los cinco segmentos: cuánto contrata cada uno desde las redes */
+figure.segs{margin:96px 0 0;padding-bottom:110px}
+.segs table{width:100%;border-collapse:collapse;table-layout:fixed;border-top:1px solid var(--linea-2)}
+.segs .c1{width:22%}.segs .c2{width:34%}.segs .c4{width:14%}
+.segs th,.segs td{padding:17px 28px 17px 0;border-bottom:1px solid var(--linea);text-align:left;vertical-align:top;font-weight:400}
+.segs thead th{padding:14px 28px 12px 0;border-bottom:1px solid var(--linea-2);font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--hueso)}
+.segs tbody th{font-family:var(--tit);font-weight:600;letter-spacing:-.03em;font-size:clamp(18px,1.8vw,22px);line-height:1.15;color:var(--hueso)}
+.segs td{font-size:15.5px;line-height:1.45;color:var(--hueso)}
+.segs th:last-child,.segs td:last-child{padding-right:0}
+.segs .pers{font-weight:600;color:var(--hueso)}
+.segs .fuera th,.segs .fuera td{color:var(--hueso);font-weight:300}
+.nivel{display:flex;gap:4px;margin:5px 0 10px}
+.nivel i{width:22px;height:6px;display:block;box-shadow:inset 0 0 0 1.5px var(--linea-2)}
+.nivel[data-n="1"] i:nth-child(-n+1),.nivel[data-n="2"] i:nth-child(-n+2),.nivel[data-n="3"] i:nth-child(-n+3){background:var(--naranja);box-shadow:none}
+
+/* entrada: las personas en orden, la rama se traza, las filas una detrás de otra */
+html.js .persona{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .55s var(--sal);transition-delay:calc(var(--q) * 110ms + .1s)}
+html.js .personas.visto .persona{opacity:1;transform:none}
+html.js .cruce__ramas::after{transform:scaleX(0);transition:transform .8s var(--sal) .15s}
+html.js .cruce.visto .cruce__ramas::after{transform:none}
+html.js .segs tbody tr{opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .5s var(--sal);transition-delay:calc(var(--i) * 90ms + .1s)}
+html.js .segs.visto tbody tr{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html.js .persona,html.js .cruce__ramas::after,html.js .segs tbody tr{opacity:1;transform:none;transition:none}}
+@media print{html.js .persona,html.js .cruce__ramas::after,html.js .segs tbody tr{opacity:1;transform:none}.persona dd,.segs td,.s06-intro__txt{color:#111}}
+
+@media(max-width:1000px){
+  .s06-intro{grid-template-columns:minmax(0,1fr);gap:18px 0}
+  .personas{grid-template-columns:minmax(0,1fr);margin-top:48px}
+  .persona,.persona + .persona{padding:24px 0 30px;border-right:0;border-bottom:1px solid var(--linea)}
+  .persona:last-child{border-bottom:0}
+  .cruce__ramas{display:none}
+  .cruce__txt{margin-top:40px;padding-top:22px;border-top:1.5px solid var(--naranja)}
+}
+@media(max-width:760px){
+  .segs thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .segs table,.segs tbody,.segs tr,.segs th,.segs td{display:block;width:auto}
+  .segs tr{padding:16px 0 8px;border-bottom:1px solid var(--linea)}
+  .segs th,.segs td{border:0;padding:0 0 12px}
+  .segs td::before{content:attr(data-col);display:block;margin-bottom:3px;font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--hueso)}
+}
+
+/* ══════════ 07 · LO QUE MÁS BUSCA LA GENTE ══════════ */
+/* búsquedas, comparación, curva, tooltip y etiquetas de los videos */
+.bq-nota{margin:14px 0 0;font-size:13px;line-height:1.5;color:var(--hueso);font-weight:300}
+
+/* una búsqueda, dibujada como la barra de Google */
+.q{display:flex;align-items:center;gap:12px;min-height:48px;padding:10px 18px;border:1px solid var(--linea-2);border-radius:24px;background:var(--negro-2);font-size:15.5px;letter-spacing:-.012em;line-height:1.3;color:var(--hueso)}
+.q svg{width:16px;height:16px;flex:none;fill:none;stroke:var(--gris);stroke-width:2;stroke-linecap:round}
+.q__alza{margin-left:auto;padding-left:8px;font-size:10px;font-weight:700;letter-spacing:.15em;color:var(--naranja);white-space:nowrap}
+.qs{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+
+/* la comparación: una barra por búsqueda, la del método en naranja */
+.rank{margin:0;padding:0;list-style:none;border-top:1px solid var(--linea-2)}
+.rank li{position:relative;display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr) 128px;gap:6px 24px;align-items:center;padding:13px 0;border-bottom:1px solid var(--linea);cursor:default}
+.rank li:focus-visible{outline:2px solid var(--naranja);outline-offset:2px}
+.rank__t{font-size:15.5px;font-weight:600;letter-spacing:-.015em;line-height:1.3}
+.rank__pista{display:block;min-width:0}
+.rank__b{display:block;height:14px;width:var(--w);min-width:4px;border-radius:0 4px 4px 0;background:#6F6F6E;transform-origin:0 50%;transition:filter .2s ease}
+.rank .dest .rank__b{background:var(--naranja)}
+.rank__v{font-size:13.5px;line-height:1.3;color:var(--hueso);text-align:right;font-weight:300}
+.rank .dest .rank__v{color:var(--hueso);font-weight:600}
+@media(hover:hover) and (pointer:fine){.rank li:hover .rank__b{filter:brightness(1.3)}}
+.rank li:focus-visible .rank__b{filter:brightness(1.3)}
+
+/* la curva del año */
+.curva{position:relative}
+.curva svg{display:block;width:100%;height:auto;overflow:visible;touch-action:pan-y}
+.curva svg:focus-visible{outline:2px solid var(--naranja);outline-offset:6px}
+.c-base{stroke:rgba(255,255,255,.2);stroke-width:1}
+.c-area{fill:rgba(255,77,0,.1)}
+.c-linea{fill:none;stroke:var(--naranja);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.c-mes{fill:var(--hueso);font-family:var(--sans);font-size:11.5px;font-weight:400;letter-spacing:.02em}
+.c-punto{fill:var(--naranja);stroke:var(--negro);stroke-width:2}
+.c-et{fill:var(--hueso);font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:-.01em}
+.c-et2{fill:var(--hueso);font-family:var(--sans);font-size:12px;font-weight:300}
+.c-guia{stroke:rgba(245,244,242,.4);stroke-width:1}
+.c-hover{fill:var(--hueso);stroke:var(--negro);stroke-width:2}
+
+/* el tooltip: un solo globo por gráfico; el valor manda, la etiqueta acompaña */
+.tip{position:absolute;z-index:5;left:0;top:0;min-width:150px;max-width:240px;padding:9px 12px;border:1px solid var(--linea-2);border-radius:9px;background:#1B1B1B;box-shadow:0 8px 24px rgba(0,0,0,.45);pointer-events:none;opacity:0;transition:opacity .12s ease}
+.tip.on{opacity:1}
+.tip b{display:block;font-size:14px;font-weight:600;letter-spacing:-.012em;color:var(--hueso)}
+.tip span{display:block;margin-top:2px;font-size:12.5px;line-height:1.4;color:var(--hueso);font-weight:300}
+
+/* los videos: el tipo de mensaje de cada uno */
+.bq-tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--hueso)}
+.bq-tag::before{content:"";width:7px;height:7px;box-shadow:inset 0 0 0 1.5px var(--hueso)}
+.bq-tag--nar{color:var(--naranja)}
+.bq-tag--nar::before{box-shadow:none;background:var(--naranja)}
+
+/* entrada */
+html.js [data-ver] .rank__b{transform:scaleX(0);transition:transform .8s var(--sal),filter .2s ease;transition-delay:calc(var(--q,0) * 90ms + .1s),0s}
+html.js [data-ver].visto .rank__b{transform:none}
+html.js [data-ver] .entra{opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .5s var(--sal);transition-delay:calc(var(--q,0) * 80ms + .1s)}
+html.js [data-ver].visto .entra{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html.js [data-ver] .rank__b,html.js [data-ver] .entra{opacity:1;transform:none;transition:none}}
+@media print{html.js [data-ver] .rank__b,html.js [data-ver] .entra{opacity:1;transform:none}.tip{display:none}}
+@media(max-width:760px){.rank li{grid-template-columns:minmax(0,1fr) auto}.rank__pista{grid-column:1 / -1;grid-row:2}.rank__v{grid-row:1;grid-column:2}}
+/* 07 · la variante 1, «el buscador» (elegida el 2026-09-11) */
+/* la firma: el autocompletado de Google, en grande */
+.auto-par{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:28px 64px;margin:72px 0 0;padding-top:28px;border-top:1px solid var(--linea-2);align-items:start}
+.auto-par__lead{margin:14px 0 0;font-family:var(--tit);font-weight:600;letter-spacing:-.03em;font-size:clamp(20px,2.2vw,28px);line-height:1.2;max-width:20ch;text-wrap:balance}
+.auto{margin:0;border:1px solid var(--linea-2);border-radius:28px;background:var(--negro-2);overflow:hidden}
+.auto__campo{display:flex;align-items:center;gap:16px;padding:18px 24px;font-family:var(--tit);font-weight:600;letter-spacing:-.035em;font-size:clamp(22px,2.6vw,32px);line-height:1.1}
+.auto__campo svg{width:22px;height:22px;flex:none;fill:none;stroke:var(--gris);stroke-width:2;stroke-linecap:round}
+.auto__cursor{display:inline-block;width:2px;height:1.05em;margin-left:2px;background:var(--naranja);vertical-align:-.12em;animation:parpadeo 1.1s steps(1) infinite}
+@keyframes parpadeo{50%{opacity:0}}
+.auto__lista{margin:0;padding:6px 0 12px;list-style:none;border-top:1px solid var(--linea)}
+.auto__lista li{display:flex;align-items:center;gap:16px;padding:10px 24px;font-size:17px;letter-spacing:-.012em;color:var(--hueso);font-weight:300}
+.auto__lista li svg{width:15px;height:15px;flex:none;fill:none;stroke:var(--gris-2);stroke-width:2;stroke-linecap:round}
+.auto__lista b{font-weight:600;color:var(--hueso)}
+
+/* los ejemplos: tres columnas de búsquedas */
+.qcols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 32px;margin:72px 0 0}
+.qcols h3{margin:0 0 6px;font-family:var(--tit);font-weight:600;letter-spacing:-.035em;font-size:clamp(22px,2.3vw,28px);line-height:1.1}
+.qcols .rot{display:block;margin:0 0 12px}
+.qcols p{margin:0 0 18px;font-size:14.5px;line-height:1.45;color:var(--hueso);font-weight:300}
+
+/* comparación y curva, lado a lado */
+.v1-datos{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:48px 56px;margin:88px 0 0;align-items:start}
+.v1-datos figure{margin:0;position:relative}
+.v1-datos .rank li{grid-template-columns:minmax(0,1fr) auto}
+.v1-datos .rank__pista{grid-column:1 / -1;grid-row:2}
+.v1-datos .rank__v{grid-row:1;grid-column:2}
+
+/* los videos, en lista */
+.vids{margin:0;padding:0;list-style:none;border-top:1px solid var(--linea-2)}
+.vids li{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:4px 22px;align-items:center;padding:18px 0;border-bottom:1px solid var(--linea)}
+.vids__play{width:52px;height:36px;border-radius:10px;border:1px solid var(--linea-2);display:grid;place-items:center}
+.vids__play::after{content:"";border-left:10px solid var(--hueso);border-top:6px solid transparent;border-bottom:6px solid transparent;margin-left:3px}
+.vids a{text-decoration:none}
+.vids h4{margin:0;font-family:var(--tit);font-weight:600;letter-spacing:-.025em;font-size:clamp(18px,1.8vw,22px);line-height:1.2;text-wrap:balance}
+@media(hover:hover) and (pointer:fine){.vids a:hover h4{color:var(--naranja)}}
+.vids__meta{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:6px;font-size:13.5px;color:var(--hueso);font-weight:300}
+.vids__n{text-align:right;font-family:var(--tit);font-weight:600;letter-spacing:-.045em;font-size:clamp(28px,3vw,40px);line-height:.9;white-space:nowrap}
+.vids__n span{display:block;margin-top:6px;font-family:var(--sans);font-size:12px;font-weight:300;letter-spacing:0;color:var(--hueso)}
+.v1-remate{margin-top:88px!important}
+
+@media(max-width:1000px){.auto-par,.v1-datos{grid-template-columns:minmax(0,1fr)}.qcols{grid-template-columns:minmax(0,1fr);gap:36px 0}}
+@media(max-width:640px){.vids li{grid-template-columns:minmax(0,1fr)}.vids__play{display:none}.vids__n{text-align:left}}
+@media(prefers-reduced-motion:reduce){.auto__cursor{animation:none}}
+
+/* ══════════ 08 · EL OBJETIVO ══════════ */
+
+/* el giro: el objetivo declarado a la izquierda, el propuesto a la derecha */
+.giro{display:grid;grid-template-columns:minmax(0,1fr) 88px minmax(0,1fr);margin:64px 0 0;border-top:1px solid var(--linea-2)}
+.giro__lado{padding:26px 0 34px;min-width:0}
+.giro__lado h3{margin:16px 0 18px;font-family:var(--tit);font-weight:600;letter-spacing:-.045em;font-size:clamp(30px,3.6vw,48px);line-height:.98;max-width:15ch;text-wrap:balance}
+.giro__lado--antes h3{color:var(--hueso);font-weight:300}
+.giro__lado p{margin:0;color:var(--hueso);font-size:16.5px;line-height:1.62;max-width:44ch}
+.giro__flecha{display:flex;justify-content:center;padding-top:62px;color:var(--naranja)}
+.giro__flecha svg{width:38px;height:38px;display:block}
+
+/* qué cambia: reusa la tabla de la 04; lo nuevo va en claro, con el cuadrito naranja */
+.s07-cambia{margin-top:72px!important}
+.versus .c-ant{color:var(--hueso);font-weight:300}
+.versus .c-nue{color:var(--hueso);font-weight:600;letter-spacing:-.015em}
+.versus .c-nue span{display:block;position:relative;padding-left:17px}
+.versus .c-nue span::before{content:"";position:absolute;left:0;top:.5em;width:7px;height:7px;background:var(--naranja)}
+
+/* entrada: el declarado, la flecha, el propuesto */
+html.js .giro > *{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .55s var(--sal);transition-delay:calc(var(--q) * 150ms + .1s)}
+html.js .giro.visto > *{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .giro{grid-template-columns:minmax(0,1fr)}
+  .giro__lado--antes{padding-bottom:10px}
+  .giro__flecha{justify-content:flex-start;padding:0 0 4px}
+  .giro__flecha svg{transform:rotate(90deg)}
+  .giro__lado--nuevo{padding-top:14px}
+}
+@media(max-width:760px){.versus .c-nue::before{color:var(--naranja)}}
+
+/* ══════════ 09 · POSICIONAMIENTO (pantalla sola) ══════════ */
+.tapa--sola{min-height:calc(100svh - 56px);justify-content:center;padding:96px 0 64px}
+.tapa .frase{margin:30px 0 0;font-weight:800;letter-spacing:-.055em;font-size:clamp(56px,11vw,160px);line-height:.88}
+.frase em{display:block;font-style:normal;color:var(--naranja)}
+.tapa .frase.frase--larga{font-size:clamp(46px,8vw,116px);line-height:.92}
+.frase__baj{margin:36px 0 0;max-width:34ch;color:var(--hueso);font-family:var(--tit);font-weight:300;letter-spacing:-.03em;font-size:clamp(20px,2.2vw,28px);line-height:1.22}
+.frase__baj b{color:var(--hueso);font-weight:600}
+
+.s08-tres{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 48px;margin:64px 0 0}
+.s08-tres .bloque h3{font-size:clamp(24px,2.5vw,34px);max-width:14ch}
+.bloque--regla{border-top-color:var(--naranja)}
+.remate a{color:var(--naranja);text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:5px}
+@media(hover:hover) and (pointer:fine){.remate a:hover{text-decoration-color:var(--hueso)}}
+
+html.js .s08-tres .bloque{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .55s var(--sal);transition-delay:calc(var(--q) * 110ms + .1s)}
+html.js .s08-tres.visto .bloque{opacity:1;transform:none}
+
+@media(max-width:1000px){.s08-tres{grid-template-columns:minmax(0,1fr);gap:40px 0}.tapa--sola{min-height:0;padding:96px 0 48px}}
+
+@media(prefers-reduced-motion:reduce){html.js .giro > *,html.js .s08-tres .bloque{opacity:1;transform:none;transition:none}}
+@media print{html.js .giro > *,html.js .s08-tres .bloque{opacity:1;transform:none}.giro__lado p,.s08-tres .bloque p{color:#111}.tapa--sola{min-height:0}}
+
+/* ══════════ 10 a 15 · piezas compartidas ══════════ */
+/* cada sección cierra con el mismo aire que las de arriba */
+main > section[id] > .env > :last-child{padding-bottom:110px}
+.tapa h2.largo{max-width:13ch;text-wrap:balance}
+.intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 48px;padding:40px 0 0;align-items:start}
+.intro__lead{margin:0;font-family:var(--tit);font-weight:600;letter-spacing:-.035em;font-size:clamp(24px,2.8vw,36px);line-height:1.12;max-width:21ch;text-wrap:balance}
+.intro__lead em{font-style:normal;color:var(--naranja)}
+.intro__txt{margin:0;color:var(--hueso);font-size:16.5px;line-height:1.62;max-width:46ch}
+.fig{margin:72px 0 0}
+.dos,.tres{display:grid;gap:40px 48px;margin:72px 0 0}
+.dos{grid-template-columns:repeat(2,minmax(0,1fr))}
+.tres{grid-template-columns:repeat(3,minmax(0,1fr))}
+.dos .bloque h3,.tres .bloque h3{font-size:clamp(24px,2.5vw,34px);max-width:15ch}
+.bloque > ul{margin-top:20px}
+/* par: el título a la izquierda, la lista a la derecha */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.chips li{padding:7px 13px;border:1px solid var(--linea-2);border-radius:100px;font-size:14px;font-weight:500;letter-spacing:-.01em;line-height:1.3;color:var(--hueso)}
+
+/* tabla: la misma forma que la de los cinco segmentos de la 06 */
+.tabla table{width:100%;border-collapse:collapse;table-layout:fixed;border-top:1px solid var(--linea-2)}
+.tabla th,.tabla td{padding:17px 28px 17px 0;border-bottom:1px solid var(--linea);text-align:left;vertical-align:top;font-weight:400}
+.tabla thead th{padding:14px 28px 12px 0;border-bottom:1px solid var(--linea-2);font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--hueso)}
+.tabla tbody th{font-family:var(--tit);font-weight:600;letter-spacing:-.03em;font-size:clamp(18px,1.8vw,22px);line-height:1.15;color:var(--hueso)}
+.tabla td{font-size:15.5px;line-height:1.45;color:var(--hueso)}
+.tabla th:last-child,.tabla td:last-child{padding-right:0}
+@media(max-width:760px){
+  .tabla thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .tabla table,.tabla tbody,.tabla tr,.tabla th,.tabla td{display:block;width:auto}
+  .tabla tr{padding:16px 0 8px;border-bottom:1px solid var(--linea)}
+  .tabla th,.tabla td{border:0;padding:0 0 12px}
+  .tabla td::before{content:attr(data-col);display:block;margin-bottom:3px;font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--hueso)}
+}
+
+/* entrada genérica: los hijos de .aparece y las filas de .tabla, en orden */
+html.js .aparece > *{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .55s var(--sal);transition-delay:calc(var(--q,0) * 100ms + .1s)}
+html.js .aparece.visto > *{opacity:1;transform:none}
+html.js .tabla tbody tr{opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .5s var(--sal);transition-delay:calc(var(--i,0) * 90ms + .1s)}
+html.js .tabla.visto tbody tr{opacity:1;transform:none}
+
+@media(max-width:1000px){
+  .intro{grid-template-columns:minmax(0,1fr);gap:18px 0}
+  .dos,.tres{grid-template-columns:minmax(0,1fr)}
+}
+
+/* ══════════ 10 · CONTENIDO ══════════ */
+.barra100{display:flex;gap:3px;height:16px}
+.barra100 i{display:block;background:var(--c);transform-origin:0 50%}
+.temas__lista{margin:20px 0 0;padding:0;list-style:none;border-top:1px solid var(--linea-2)}
+.tema{display:grid;grid-template-columns:96px minmax(0,1fr) minmax(0,1fr);gap:4px 28px;align-items:baseline;padding:15px 0;border-bottom:1px solid var(--linea)}
+.tema__pct{font-family:var(--tit);font-weight:600;letter-spacing:-.045em;font-size:clamp(28px,3vw,40px);line-height:1;white-space:nowrap}
+.tema h4{margin:0;display:flex;align-items:center;gap:12px;font-family:var(--tit);font-weight:600;letter-spacing:-.03em;font-size:clamp(18px,1.8vw,22px);line-height:1.15}
+.tema h4::before{content:"";width:10px;height:10px;flex:none;background:var(--c)}
+.tema p{margin:0;font-size:15.5px;line-height:1.45;color:var(--hueso);font-weight:300}
+/* los cuatro formatos, cada uno con su video de ejemplo */
+.fmtv{margin:0;padding:28px 0 0;list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:44px 24px;border-top:1px solid var(--linea-2)}
+.fv{display:flex;flex-direction:column;min-width:0}
+.fv__vid{aspect-ratio:9/16;background:#000;border:1px solid var(--linea);overflow:hidden}
+.fv__vid video{display:block;width:100%;height:100%;object-fit:cover;background:#000}
+.fv__n{margin-top:18px;font-size:11px;font-weight:700;letter-spacing:.15em;color:var(--naranja)}
+.fv h4{margin:6px 0 0;font-family:var(--tit);font-weight:600;letter-spacing:-.03em;font-size:clamp(19px,1.8vw,22px);line-height:1.15;text-wrap:balance}
+.fv__txt{margin:10px 0 0;font-size:15px;line-height:1.5;color:var(--hueso)}
+.fv__req{margin:14px 0 0;padding-top:12px;border-top:1px solid var(--linea);font-size:14px;line-height:1.45;color:var(--hueso);font-weight:300}
+.fv__req .rot{display:block;margin-bottom:4px}
+.fv__req--cam b{display:block;position:relative;padding-left:17px;color:var(--hueso);font-weight:600}
+.fv__req--cam b::before{content:"";position:absolute;left:0;top:.5em;width:7px;height:7px;background:var(--naranja)}
+.fv__fuente{margin:auto 0 0;padding-top:14px;font-size:12.5px;color:var(--hueso);font-weight:300}
+.fv__fuente a{color:var(--hueso);text-underline-offset:3px;font-weight:300}
+@media(hover:hover) and (pointer:fine){.fv__fuente a:hover{color:var(--naranja)}}
+@media(max-width:1000px){.fmtv{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.fmtv{grid-template-columns:minmax(0,1fr)}.fv__vid{max-width:300px}}
+html.js .barra100 i{transform:scaleX(0);transition:transform .7s var(--sal);transition-delay:calc(var(--q,0) * 90ms + .1s)}
+html.js .temas.visto .barra100 i{transform:none}
+@media(max-width:760px){.tema{grid-template-columns:72px minmax(0,1fr)}.tema p{grid-column:2}}
+
+/* ══════════ 11 · EL EMBUDO ══════════ */
+.embudo__cab,.esc{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,4fr) minmax(0,3fr);gap:0 32px;align-items:center}
+.embudo__cab{padding:0 0 12px;border-bottom:1px solid var(--linea-2)}
+.embudo{margin:0;padding:0;list-style:none}
+.esc{padding:14px 0;border-bottom:1px solid var(--linea)}
+.esc__forma{display:flex;justify-content:center}
+.esc__barra{width:var(--w);min-height:54px;display:flex;align-items:center;justify-content:center;gap:10px;padding:8px 14px;border:1.5px dashed rgba(255,77,0,.75)}
+.esc__barra b{font-family:var(--tit);font-weight:600;letter-spacing:-.03em;font-size:clamp(16px,1.6vw,20px);line-height:1.1}
+.esc__n{font-size:10px;font-weight:700;letter-spacing:.15em;color:var(--naranja)}
+.esc--ok .esc__barra{border:0;background:rgba(245,244,242,.13)}
+.esc--ok .esc__n{color:var(--hueso);font-weight:300}
+.esc__mom{margin:0;font-size:15.5px;font-weight:600;letter-spacing:-.015em;color:var(--hueso)}
+.esc__come{margin:3px 0 0;font-size:14px;line-height:1.45;color:var(--hueso);font-weight:300}
+.estado{display:inline-flex;align-items:baseline;gap:9px;font-size:14.5px;font-weight:600;letter-spacing:-.012em;line-height:1.35}
+.estado::before{content:"";width:7px;height:7px;flex:none;background:var(--naranja);transform:translateY(-1px)}
+.estado--gris{color:var(--hueso);font-weight:300}
+.estado--gris::before{background:none;box-shadow:inset 0 0 0 1.5px var(--hueso)}
+html.js .esc__barra{opacity:0;transform:scaleX(.3);transition:opacity .4s ease,transform .6s var(--sal);transition-delay:calc(var(--q,0) * 110ms + .1s)}
+html.js .embudo.visto .esc__barra{opacity:1;transform:none}
+
+.decision{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:40px 64px;margin:88px 0 0;padding-top:28px;border-top:1px solid var(--linea-2);align-items:start}
+.decision h3{margin:16px 0 18px;font-family:var(--tit);font-weight:600;letter-spacing:-.045em;font-size:clamp(30px,3.6vw,48px);line-height:.98;max-width:14ch;text-wrap:balance}
+.decision p{margin:0;color:var(--hueso);font-size:16.5px;line-height:1.62;max-width:44ch}
+.chat{margin:0;max-width:460px;border:1px solid var(--linea-2);border-radius:20px;background:var(--negro-2);overflow:hidden}
+.chat__cab{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--linea)}
+.chat__cab > i{width:32px;height:32px;border-radius:50%;background:var(--naranja);flex:none}
+.chat__cab b{display:block;font-size:14.5px;font-weight:600;letter-spacing:-.015em}
+.chat__cab span{display:block;font-size:12px;color:var(--hueso);font-weight:300}
+.chat__cuerpo{display:flex;flex-direction:column;gap:8px;padding:18px}
+.burbuja{align-self:flex-start;max-width:86%;margin:0;padding:10px 14px;border-radius:14px 14px 14px 4px;background:rgba(245,244,242,.08);font-size:14.5px;line-height:1.45;color:var(--hueso)}
+.burbuja--in{align-self:flex-end;border-radius:14px 14px 4px 14px;background:rgba(255,77,0,.18);color:var(--hueso)}
+.burbuja ol{margin:0;padding:0 0 0 18px}
+.burbuja li + li{margin-top:3px}
+.chat__pie{padding:14px 18px 18px;border-top:1px solid var(--linea)}
+.chat__pie .rot{display:block;margin-bottom:10px}
+.chat__pie .chips li{font-size:13px;padding:5px 11px}
+@media(max-width:1000px){.decision{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:800px){
+  .embudo__cab{display:none}
+  .embudo{border-top:1px solid var(--linea-2)}
+  .esc{grid-template-columns:minmax(0,1fr);gap:10px 0;padding:18px 0}
+  .esc__forma{justify-content:flex-start}
+}
+
+/* ══════════ 12 · CANALES, MARCA Y SITIO WEB ══════════ */
+.orden{margin:0;padding:0;list-style:none;border-top:1px solid var(--linea-2)}
+.canal{display:grid;grid-template-columns:64px minmax(0,4fr) minmax(0,6fr) 110px;gap:4px 28px;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--linea)}
+.canal__n{font-family:var(--tit);font-weight:300;letter-spacing:-.05em;font-size:clamp(34px,3.6vw,48px);line-height:.9;color:var(--hueso)}
+.canal--gratis .canal__n{color:var(--naranja)}
+.canal h4{margin:0;font-family:var(--tit);font-weight:600;letter-spacing:-.03em;font-size:clamp(20px,2vw,26px);line-height:1.1}
+.canal p{margin:0;font-size:15.5px;line-height:1.5;color:var(--hueso)}
+.canal__costo{justify-self:end;font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--naranja);white-space:nowrap}
+.piezas{margin:0;padding:0;list-style:none;border-top:1px solid var(--linea);counter-reset:p}
+.piezas li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:2px 12px;padding:13px 0;border-bottom:1px solid var(--linea);counter-increment:p}
+.piezas li::before{content:counter(p);grid-row:span 2;padding-top:5px;font-size:10px;font-weight:700;letter-spacing:.15em;color:var(--naranja)}
+.piezas b{font-weight:600;font-size:16px;letter-spacing:-.015em}
+.piezas span{font-size:14px;color:var(--hueso);line-height:1.45;font-weight:300}
+.req{margin:24px 0 0}
+.sitio{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:28px 36px;align-items:start}
+.movil{border:1.5px solid var(--linea-2);border-radius:30px;padding:12px 11px 16px;background:var(--negro-2)}
+.movil__barra{display:block;width:64px;height:5px;border-radius:9px;background:var(--linea-2);margin:0 auto 12px}
+.bloques{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:5px;counter-reset:b}
+.bloques li{display:flex;align-items:center;gap:10px;min-height:30px;padding:6px 11px;border-radius:7px;background:rgba(245,244,242,.06);font-size:12.5px;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--hueso);counter-increment:b}
+.bloques li::before{content:counter(b,decimal-leading-zero);font-size:9.5px;font-weight:500;letter-spacing:.08em;color:var(--hueso)}
+.bloques .b-hero{min-height:78px;align-items:flex-end;background:rgba(245,244,242,.11);font-family:var(--tit);font-size:16px;letter-spacing:-.03em;color:var(--hueso)}
+.bloques .b-hero i{font-style:normal;margin-left:auto;padding:4px 10px;border-radius:100px;background:var(--naranja);color:#fff;font-family:var(--sans);font-size:11px;letter-spacing:0}
+.bloques .b-ad{min-height:66px;background:rgba(255,77,0,.1);box-shadow:inset 0 0 0 1.5px var(--naranja);color:var(--hueso)}
+.internas{margin:0;padding:0;list-style:none;border-top:1px solid var(--linea)}
+.internas li{padding:11px 0;border-bottom:1px solid var(--linea);font-size:15.5px;font-weight:600;letter-spacing:-.015em}
+.sitio__nota{margin:18px 0 0;font-size:14.5px;color:var(--hueso);line-height:1.5;font-weight:300}
+.sitio .rot{display:block;margin-bottom:14px}
+@media(max-width:800px){.canal{grid-template-columns:48px minmax(0,1fr)}.canal p,.canal__costo{grid-column:2;justify-self:start}}
+@media(max-width:560px){.sitio{grid-template-columns:minmax(0,1fr)}.movil{max-width:300px}}
+
+/* ══════════ 13 · PRODUCCIÓN ══════════ */
+/* la tabla del mes: el número del formato de la 10, arriba del nombre */
+.semanas td .num{display:block;margin-bottom:4px;font-size:11px;font-weight:700;letter-spacing:.15em;color:var(--naranja)}
+.semanas tbody td{font-family:var(--tit);font-weight:600;letter-spacing:-.02em;font-size:clamp(16px,1.5vw,19px);line-height:1.2}
+.semanas tbody td[colspan]{font-family:var(--sans);font-weight:400;letter-spacing:-.011em;font-size:15.5px}
+
+/* ══════════ 14 · MEDICIÓN ══════════ */
+.kpis__cab,.kpi{display:grid;grid-template-columns:40px minmax(0,1fr) 220px;gap:4px 28px;align-items:center}
+.kpis__cab{padding:0 0 12px;border-bottom:1px solid var(--linea-2)}
+.kpis__cab .rot:last-child{text-align:right}
+.kpis{margin:0;padding:0;list-style:none;counter-reset:k}
+.kpi{padding:20px 0;border-bottom:1px solid var(--linea);counter-increment:k}
+.kpi::before{content:counter(k);align-self:start;padding-top:8px;font-size:10px;font-weight:300;letter-spacing:.15em;color:var(--hueso)}
+.kpi h4{margin:0;font-family:var(--tit);font-weight:600;letter-spacing:-.03em;font-size:clamp(20px,2vw,26px);line-height:1.1}
+.kpi p{margin:5px 0 0;font-size:15px;line-height:1.45;color:var(--hueso);font-weight:300}
+.kpi__hoy{text-align:right}
+.kpi__hoy b{display:block;font-family:var(--tit);font-weight:600;letter-spacing:-.05em;font-size:clamp(40px,4.4vw,58px);line-height:.85;color:var(--naranja)}
+.kpi__hoy span{display:block;margin-top:8px;font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--hueso)}
+@media(max-width:700px){
+  .kpis__cab{display:none}
+  .kpis{border-top:1px solid var(--linea-2)}
+  .kpi{grid-template-columns:28px minmax(0,1fr)}
+  .kpi__hoy{grid-column:2;display:flex;align-items:baseline;gap:12px;margin-top:8px;text-align:left}
+  .kpi__hoy b{font-size:40px}
+  .kpi__hoy span{margin:0}
+}
+
+/* ══════════ 15 · HOJA DE RUTA ══════════ */
+.ruta__hint{display:none;margin:0 0 10px;font-size:13px;color:var(--hueso);font-weight:300}
+.ruta__scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-top:1px solid var(--linea-2)}
+.ruta__scroll:focus-visible{outline-offset:-2px}
+.gantt{display:grid;grid-template-columns:minmax(210px,1.7fr) repeat(12,minmax(40px,1fr));grid-template-rows:auto auto repeat(7,46px);min-width:820px;position:relative}
+.g-banda{grid-row:1 / -1;background:rgba(245,244,242,.028)}
+.g-mes{grid-row:1;padding:14px 12px 8px;border-left:1px solid var(--linea);font-size:13px;color:var(--hueso);white-space:nowrap;font-weight:300}
+.g-mes b{display:block;margin-bottom:2px;font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--hueso)}
+.g-sem{grid-row:2;padding:4px 0 10px;border-bottom:1px solid var(--linea-2);font-size:11px;font-weight:300;color:var(--hueso);text-align:center}
+.g-sem--lab{text-align:left;font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase}
+.g-sem--hito{color:var(--naranja)}
+.g-lab{grid-column:1;display:flex;align-items:center;padding:0 16px 0 0;border-bottom:1px solid var(--linea);font-size:14px;font-weight:600;letter-spacing:-.012em;line-height:1.25}
+.g-pista{grid-column:2 / 14;border-bottom:1px solid var(--linea)}
+.g-b{position:relative;z-index:1;align-self:center;height:22px;margin:0 2px;display:flex;align-items:center;padding:0 8px;overflow:hidden;white-space:nowrap;background:rgba(245,244,242,.42);color:var(--negro);font-size:11.5px;font-weight:700;letter-spacing:-.005em;transform-origin:0 50%}
+.g-b--nar{background:var(--naranja);color:#fff}
+.g-m{position:relative;z-index:1;align-self:center;justify-self:center;width:11px;height:11px;background:var(--hueso);transform:rotate(45deg)}
+.g-m--nar{background:var(--naranja)}
+.g-hito{grid-row:2 / -1;z-index:2;border-left:1.5px dashed var(--naranja);pointer-events:none}
+.ruta__ley{display:flex;flex-wrap:wrap;gap:6px 22px;margin:14px 0 0;font-size:13px;color:var(--hueso);font-weight:300}
+.ruta__ley span{display:inline-flex;align-items:center;gap:8px}
+.ruta__ley i{display:block}
+.ruta__ley .l-b{width:18px;height:8px;background:rgba(245,244,242,.42)}
+.ruta__ley .l-nar{width:18px;height:8px;background:var(--naranja)}
+.ruta__ley .l-m{width:8px;height:8px;background:var(--hueso);transform:rotate(45deg)}
+.ruta__ley .l-hito{width:0;height:14px;border-left:1.5px dashed var(--naranja)}
+html.js .g-b{transform:scaleX(0);transition:transform .6s var(--sal);transition-delay:calc(var(--q,0) * 70ms + .15s)}
+html.js .g-m{opacity:0;transition:opacity .4s ease;transition-delay:calc(var(--q,0) * 70ms + .3s)}
+html.js .gantt.visto .g-b{transform:none}
+html.js .gantt.visto .g-m{opacity:1}
+@media(max-width:860px){.ruta__hint{display:block}}
+
+/* ══════════ PIE ══════════ */
+.pie{border-top:1px solid var(--linea)}
+.pie__in{display:flex;flex-wrap:wrap;align-items:center;gap:10px 32px;padding-top:22px;padding-bottom:36px;font-size:13px;color:var(--hueso);font-weight:300}
+.pie__links{margin-left:auto;display:flex;gap:18px}
+.pie__links a{text-decoration:none;color:var(--hueso);transition:color .2s ease;font-weight:300}
+@media(hover:hover) and (pointer:fine){.pie__links a:hover{color:var(--naranja)}}
+@media(max-width:700px){.pie__links{margin-left:0}}
+
+/* 10 a 15: sin movimiento y en papel, todo quieto y legible */
+@media(prefers-reduced-motion:reduce){
+  html.js .aparece > *,html.js .tabla tbody tr,html.js .barra100 i,html.js .esc__barra,html.js .g-b{opacity:1;transform:none;transition:none}
+  html.js .g-m{opacity:1;transition:none}
+}
+@media print{
+  html.js .aparece > *,html.js .tabla tbody tr,html.js .barra100 i,html.js .esc__barra,html.js .g-b{opacity:1;transform:none}
+  html.js .g-m{opacity:1}
+  .intro__txt,.tabla td,.esc__come,.canal p,.piezas span,.burbuja,.kpi p,.decision p,.bloque p,.fv__txt,.fv__req{color:#111}
+  .ruta__scroll{overflow:visible}
+}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .tics i,.rotulo,h1,.para,.bajada,.acto__num,.acto h2,.acto__q,.acto__hay,.datos{animation:none;opacity:1;transform:none}
+  .grupo i,.bajar,.barra{transition:none}
+}
+@media print{
+  body{background:#fff;color:#111}
+  .barra,.portada__luz{display:none}
+  *{animation:none!important}
+  .portada{min-height:0}
+  .texto p,.canales b{color:#111}
+}
+
+/* ══════════ PROPIO DE ESTE DOCUMENTO ══════════ */
+/* 02 · las dos cifras de la cuenta */
+.cifras{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px;margin:56px 0 0}
+.cifra{border-top:1px solid var(--linea-2);padding-top:22px;min-width:0}
+.cifra__n{display:block;font-family:var(--tit);font-weight:600;letter-spacing:-.05em;font-size:clamp(56px,7vw,96px);line-height:.86}
+.cifra--gris .cifra__n{font-weight:200}
+.cifra--nar .cifra__n{color:var(--naranja)}
+.cifra__q{display:block;margin-top:14px;font-size:16px;line-height:1.5;font-weight:300;max-width:38ch}
+.cifras__pie{grid-column:1 / -1;margin:30px 0 0;font-family:var(--tit);font-weight:600;letter-spacing:-.03em;font-size:clamp(19px,2.1vw,26px);line-height:1.22;max-width:40ch}
+.s02-puntos{margin-top:72px}
+@media(max-width:800px){.cifras{grid-template-columns:minmax(0,1fr);gap:28px 0}}
+
+/* 03 · una frase citada, como prueba */
+.cita{display:block;font-family:var(--tit);font-weight:600;letter-spacing:-.04em;font-size:clamp(28px,3.4vw,44px);line-height:1.05;max-width:18ch;text-wrap:balance}
+.cita__pie{display:block;margin-top:18px;font-size:14px;line-height:1.45;font-weight:300}
+
+/* 04 · la cuenta, con su usuario abajo */
+.ref__h{display:block;margin-top:6px;font-family:var(--sans);font-size:13px;font-weight:300;letter-spacing:0;line-height:1.4}
+.ref__h a{text-underline-offset:3px}
+@media(hover:hover) and (pointer:fine){.ref__h a:hover{color:var(--naranja)}}
+
+/* 12 · el perfil con las marcas encima (viene de B-laminas) */
+.perfil{display:grid;grid-template-columns:minmax(260px,340px) minmax(0,1fr);gap:0 64px;margin:72px 0 0;align-items:start}
+.shot{position:relative;margin:0;border:1px solid var(--linea-2);background:#000;line-height:0}
+.shot img{width:100%;height:auto;display:block}
+.pin{position:absolute;width:27px;height:27px;border-radius:50%;transform:translate(-50%,-50%);display:grid;place-items:center;font-family:var(--tit);font-size:13px;font-weight:600;line-height:1;background:var(--naranja);color:#fff;border:2px solid rgba(255,255,255,.92);box-shadow:0 3px 10px rgba(0,0,0,.45);transition:transform .3s var(--sal),box-shadow .3s var(--sal)}
+.pin.act{transform:translate(-50%,-50%) scale(1.34);box-shadow:0 6px 18px rgba(0,0,0,.55)}
+.marcas{margin:14px 0 0;padding:0;list-style:none;border-top:1px solid var(--linea)}
+.marca__f{border-bottom:1px solid var(--linea)}
+.marca__b{display:grid;grid-template-columns:26px minmax(0,1fr);gap:0 16px;align-items:start;width:100%;text-align:left;background:none;border:0;padding:15px 0;cursor:pointer;font:inherit;color:inherit}
+@media(hover:hover) and (pointer:fine){.marca__b:hover .marca__t{color:var(--naranja)}}
+.marca__b:focus-visible .marca__t{color:var(--naranja)}
+.marca__n{width:23px;height:23px;border-radius:50%;display:grid;place-items:center;font-family:var(--tit);font-size:12px;font-weight:600;margin-top:2px;background:var(--naranja);color:#fff}
+.marca__t{font-weight:600;font-size:16.5px;letter-spacing:-.02em;line-height:1.35;transition:color .2s}
+.marca__d{display:block;font-weight:300;font-size:15px;margin-top:4px;line-height:1.45}
+@media(max-width:1000px){.perfil{grid-template-columns:minmax(0,1fr);gap:36px 0}.shot{max-width:320px}}
+@media(prefers-reduced-motion:reduce){.pin{transition:none}}
+
+/* 12 · opciones, la bio y el aviso */
+.opc{margin:0;border-top:1px solid var(--linea)}
+.opc__f{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:0 22px;padding:12px 0;border-bottom:1px solid var(--linea);align-items:baseline}
+.opc__n{font-weight:600;font-size:15.5px;letter-spacing:-.012em}
+.opc__p{font-size:15px;font-weight:300}
+.bio{border:1px solid var(--linea-2);padding:16px 20px;background:var(--negro-2)}
+.bio__l{display:grid;grid-template-columns:78px minmax(0,1fr);gap:0 16px;padding:10px 0;border-bottom:1px solid var(--linea);align-items:baseline}
+.bio__l:last-child{border-bottom:0}
+.bio__i{font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+.bio__t{font-size:16px;line-height:1.45}
+.bio__t--cta{font-weight:600;color:var(--naranja)}
+.aviso{margin:20px 0 0;padding-left:18px;border-left:1.5px solid var(--naranja);font-size:15.5px;line-height:1.5;max-width:52ch}
+.aviso b{font-weight:600}
+.prueba .aviso,.prueba .sitio__nota{margin-top:20px}
+@media(max-width:700px){.opc__f{grid-template-columns:minmax(0,1fr);gap:4px 0}}
+@media print{.marca__d,.opc__p{color:#111}}
+
+/* 10 · cinco formatos: cinco columnas en pantalla ancha */
+.fmtv--cinco{grid-template-columns:repeat(5,minmax(0,1fr));gap:44px 20px}
+.fmtv--cinco .fv h4{font-size:clamp(17px,1.5vw,20px)}
+.fmtv--cinco .fv__txt{font-size:14.5px}
+@media(max-width:1180px){.fmtv--cinco{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:760px){.fmtv--cinco{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.fmtv--cinco{grid-template-columns:minmax(0,1fr)}}
+
+/* 04 · lo más visto de cada cuenta */
+.vista__n{display:block;font-family:var(--tit);font-weight:600;letter-spacing:-.04em;font-size:clamp(22px,2.2vw,30px);line-height:1}
+.vista__f{display:inline-flex;align-items:center;gap:8px;margin-top:8px;font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase}
+.vista__f::before{content:"";width:7px;height:7px;box-shadow:inset 0 0 0 1.5px var(--hueso)}
+.vista__f--si{color:var(--naranja)}
+.vista__f--si::before{box-shadow:none;background:var(--naranja)}
+
+/* ══════════ PROPIO DE MIOMIO ══════════ */
+.cadena--4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.cadena--4::before{width:75%}
+html.js .cadena li:nth-child(4)::before{transition-delay:1.3s}
+.fmtv--3{grid-template-columns:repeat(3,minmax(0,1fr));max-width:860px}
+.rank .med .rank__b{background:rgba(245,244,242,.42)}
+.rank .nadie-habla .rank__b{background:rgba(245,244,242,.16)}
+.rank .nadie-habla .rank__t{font-weight:400}
+.rank__t small{display:block;font-size:12.5px;font-weight:300;color:var(--gris);letter-spacing:0;margin-top:2px}
+.rodo-ley .l-b{background:rgba(245,244,242,.42)}
+.ruta__ley .l-gris{width:18px;height:8px;background:rgba(245,244,242,.16)}
+.chips--grandes li{font-size:15px;padding:9px 15px}
+/* Perfil de Instagram simulado (§10) */
+.perfil{display:grid;grid-template-columns:minmax(0,390px) minmax(0,1fr);gap:0 72px;align-items:start;margin-top:56px}
+.ig{margin:0;background:#000;border:1px solid var(--linea-2);border-radius:26px;padding:24px 18px 20px;color:var(--hueso);font-family:var(--sans)}
+.ig p{margin:0}
+.ig__cab{display:flex;align-items:center;gap:18px}
+.ig__ava{flex:none;width:80px;height:80px;border-radius:50%;background:var(--hueso);color:var(--negro);display:grid;place-items:center;font-family:var(--tit);font-weight:800;font-size:14px;letter-spacing:-.02em}
+.ig__usu{font-size:17px;font-weight:600;letter-spacing:-.01em}
+.ig__nombre{font-size:13.5px;margin-top:3px!important}
+.ig__cat{font-size:13px;color:var(--gris);margin-top:2px!important}
+.ig__bio{font-size:13.5px;line-height:1.5;margin-top:16px!important}
+.ig__link{font-size:13.5px;font-weight:600;color:#E0F1FF;margin-top:4px!important}
+.ig__link span{font-weight:300;color:var(--gris)}
+.ig__bots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:16px}
+.ig__bots span{background:#262626;border-radius:8px;padding:8px 0;text-align:center;font-size:13px;font-weight:600}
+.ig__bots .ig__seg{background:#4A5DF9}
+.ig__dest{display:flex;gap:14px;overflow-x:auto;margin:22px -18px 0;padding:0 18px 6px;list-style:none;scrollbar-width:none}
+.ig__dest::-webkit-scrollbar{display:none}
+.ig__dest li{flex:none;width:66px;display:flex;flex-direction:column;align-items:center;gap:7px;font-size:11.5px;text-align:center}
+.ig__dest li span{max-width:66px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ig__dest i{display:grid;place-items:center;width:62px;height:62px;border-radius:50%;background:#262626;box-shadow:0 0 0 2px #000,0 0 0 3px var(--linea-2)}
+.ig__dest svg{width:26px;height:26px;fill:none;stroke:var(--hueso);stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round}
+.ig__pie{margin-top:14px;font-size:12px;color:var(--gris);font-weight:300}
+@media(max-width:800px){.perfil{grid-template-columns:minmax(0,1fr);gap:44px 0}.ig{max-width:390px}}
+/* Apertura de sección: la columna derecha de .intro puede traer un rótulo y una lista */
+.intro > div > .rot{display:block;margin-bottom:14px}
+/* Animaciones con motivo (todas se ven completas sin JS y con movimiento reducido):
+   «Decirlo» se tacha cuando entra «Mostrarlo»; el mes se lee semana por semana; el indicador que manda se subraya. */
+.tacha{background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:0 58%;background-size:100% 1.5px;transition:background-size .5s var(--sal),color .4s ease;transition-delay:calc(var(--i,0) * 90ms + .7s)}
+html.js .tachar .tacha{background-size:0 1.5px}
+html.js .tachar.visto .tacha{background-size:100% 1.5px;color:var(--gris)}
+html.js .semanas tbody tr:first-child td{opacity:0;transform:translateX(-12px);transition:opacity .45s ease,transform .55s var(--sal)}
+html.js .semanas tbody tr:first-child td:nth-child(2){transition-delay:.15s}
+html.js .semanas tbody tr:first-child td:nth-child(3){transition-delay:.4s}
+html.js .semanas tbody tr:first-child td:nth-child(4){transition-delay:.65s}
+html.js .semanas tbody tr:first-child td:nth-child(5){transition-delay:.9s}
+html.js .semanas.visto tbody tr:first-child td{opacity:1;transform:none}
+.kpi:first-child h4{background-image:linear-gradient(var(--naranja),var(--naranja));background-repeat:no-repeat;background-position:0 100%;background-size:100% 3px;padding-bottom:4px;display:inline;transition:background-size .7s var(--sal) .6s}
+html.js .kpis .kpi:first-child h4{background-size:0 3px}
+html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
+@media(prefers-reduced-motion:reduce){html.js .tachar .tacha{background-size:100% 1.5px;transition:none}html.js .semanas tbody tr:first-child td{opacity:1;transform:none;transition:none}html.js .kpis .kpi:first-child h4{background-size:100% 3px;transition:none}}
+/* Portada institucional: tapa del documento arriba, ficha abajo, con aire entre las dos */
+.portada{justify-content:space-between;gap:72px;padding:148px 0 0}
+.portada__luz{opacity:.6}
+.portada__cuerpo{flex:1;display:flex;flex-direction:column;justify-content:center}
+.portada .rotulo{margin-bottom:40px}
+.portada h1{font-weight:700;font-size:clamp(48px,7.2vw,96px);line-height:.96;letter-spacing:-.04em}
+.tapa-doc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px 80px;align-items:start;margin-top:64px;padding-top:28px;border-top:1px solid var(--linea-2)}
+.cliente{max-width:520px}
+.cliente__n{margin:10px 0 0;font-family:var(--tit);font-weight:600;font-size:clamp(26px,2.6vw,34px);letter-spacing:-.03em;line-height:1.05}
+.cliente__d{margin:8px 0 0;font-size:15px;line-height:1.5;font-weight:300;color:var(--gris)}
+.tapa-doc__lado{padding-top:24px}
+.tapa-doc__lado .bajada{margin:0 0 32px;max-width:38ch;font-size:clamp(17px,1.4vw,19px)}
+.tapa-doc__lado .bajar{margin-left:0}
+.docmeta{margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--linea);animation:suave .5s var(--sal) .5s both}
+.docmeta div{padding:20px 24px 28px 0;min-width:0}
+.docmeta div + div{padding-left:24px;border-left:1px solid var(--linea)}
+.docmeta dt{font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--gris)}
+.docmeta dd{margin:8px 0 0;font-size:15px;font-weight:600;letter-spacing:-.012em}
+/* Índice */
+.toc{padding:128px 0 136px;border-top:1px solid var(--linea)}
+.toc__cab{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:14px 80px;align-items:end;padding-bottom:48px;border-bottom:1px solid var(--linea-2)}
+.toc__cab .rot{grid-column:1/-1}
+.toc__cab h2{margin:0;font-family:var(--tit);font-weight:600;font-size:clamp(34px,4vw,52px);letter-spacing:-.04em;line-height:1}
+.toc__cab p{margin:0;max-width:52ch;font-size:17px;line-height:1.6;font-weight:300}
+.toc__partes{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:0 80px}
+.toc__parte{padding-top:36px}
+.toc__n{margin:0;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--naranja)}
+.toc__parte h3{margin:8px 0 22px;font-family:var(--tit);font-weight:600;font-size:24px;letter-spacing:-.03em}
+.toc ol{margin:0;padding:0;list-style:none;border-top:1px solid var(--linea)}
+.toc__parte:last-child ol{columns:2;column-gap:48px;border-top:0}
+.toc__parte:last-child li{break-inside:avoid;border-top:1px solid var(--linea)}
+.toc li{border-bottom:1px solid var(--linea)}
+.toc__parte:last-child li{border-bottom:0}
+.toc__parte:last-child ol{border-bottom:1px solid var(--linea)}
+.toc a{display:flex;align-items:baseline;gap:18px;padding:14px 0;min-height:48px;text-decoration:none;font-size:16.5px;font-weight:500;letter-spacing:-.015em;transition:color .2s ease}
+.toc a span{flex:none;width:22px;font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--gris);font-variant-numeric:tabular-nums}
+@media(hover:hover) and (pointer:fine){.toc a:hover{color:var(--naranja)}.toc a:hover span{color:var(--naranja)}}
+/* Apertura de cada parte */
+.parte-sep{background:var(--negro-2);border-top:1px solid var(--linea)}
+.parte-sep__in{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:10px 80px;align-items:end;padding-top:88px;padding-bottom:88px}
+.parte-sep__in .rot{grid-column:1/-1}
+.parte-sep__t{margin:0;font-family:var(--tit);font-weight:700;font-size:clamp(40px,5.4vw,72px);letter-spacing:-.04em;line-height:.95}
+.parte-sep__q{margin:0;max-width:46ch;font-size:clamp(17px,1.5vw,20px);line-height:1.5;font-weight:300}
+/* Las tapas de sección, sin el medio pantallazo vacío */
+.tapa{min-height:0;padding:128px 0 36px}
+.parte-sep + section .tapa{border-top:0;padding-top:88px}
+.tapa h2{letter-spacing:-.04em}
+@media(max-width:900px){
+  .tapa-doc,.toc__cab,.toc__partes,.parte-sep__in{grid-template-columns:minmax(0,1fr)}
+  .tapa-doc{gap:40px}
+  .tapa-doc{margin-top:44px}.tapa-doc__lado{padding-top:0}
+  .docmeta div{padding:16px 12px 22px 0}.docmeta div + div{padding-left:14px}.docmeta dd{font-size:14px}
+  .toc{padding:88px 0 96px}
+  .toc__parte:last-child ol{columns:1}
+  .parte-sep__in{padding-top:64px;padding-bottom:64px}
+  .tapa{padding-top:96px}
+}
+@media(max-width:700px){.portada{padding-top:112px;gap:56px}.portada .rotulo{margin-bottom:28px}.tapa-doc__lado .bajar{width:100%;justify-content:space-between;margin-top:0}}
+@media(max-width:800px){.cadena--4{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:28px}.cadena--4::before{display:none}.fmtv--3{grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 14px}.fmtv--3 .fv__vid{max-width:none}.fmtv--3 .fv h4{font-size:16.5px}.fmtv--3 .fv__req{font-size:13.5px}}
+.refs{max-width:860px}
+</style>
+</head>
+<body>
+
+<header class="barra" id="barra">
+  <div class="barra__in">
+    <a class="marca" href="#"><i></i>Emanuel Seery</a>
+    <span class="barra__doc">Propuesta de contenido<span class="ancho"> · MIOMIO</span></span>
+    <nav class="avance" id="avance" aria-label="Avance de lectura">
+      <span class="grupo" data-rot="Diagnóstico"><i></i><i></i><i></i></span>
+      <span class="grupo" data-rot="El plan"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="portada">
+  <div class="portada__luz" aria-hidden="true"></div>
+
+  <div class="env portada__cuerpo">
+    <p class="rotulo">Diagnóstico y plan de redes</p>
+    <h1>Propuesta<br>de contenido</h1>
+    <div class="tapa-doc">
+      <div class="cliente">
+        <span class="rot">Preparado para</span>
+        <p class="cliente__n">MIOMIO</p>
+        <p class="cliente__d">Fábrica de artículos plásticos para el hogar · San Pedro, Buenos Aires</p>
+      </div>
+      <div class="tapa-doc__lado">
+        <p class="bajada">Dónde está hoy la marca, qué tiene a favor y qué hacer para que el comercio la encuentre y le escriba.</p>
+        <a class="bajar" href="#indice">
+          Leer la propuesta
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M6.5 1v11M1.5 7l5 5 5-5" stroke="currentColor" stroke-width="1.8"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="env">
+    <dl class="docmeta">
+      <div><dt>Preparado por</dt><dd>Emanuel Seery</dd></div>
+      <div><dt>Fecha</dt><dd>Octubre de 2026</dd></div>
+      <div><dt>Documento</dt><dd>Uso privado</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section id="indice" class="toc">
+  <div class="env">
+    <div class="toc__cab">
+      <span class="rot rot--nar">Contenido</span>
+      <h2>Cómo está organizada</h2>
+      <p>Dos partes. La primera mira dónde está hoy MIOMIO; la segunda, qué se propone hacer y cómo se mide.</p>
+    </div>
+    <div class="toc__partes">
+      <div class="toc__parte">
+        <p class="toc__n">Parte 1</p>
+        <h3>Diagnóstico</h3>
+        <ol>
+          <li><a href="#s02"><span>02</span>Situación actual</a></li>
+          <li><a href="#s03"><span>03</span>Lo que ya tienen</a></li>
+          <li><a href="#s04"><span>04</span>Contexto y FODA</a></li>
+        </ol>
+      </div>
+      <div class="toc__parte">
+        <p class="toc__n">Parte 2</p>
+        <h3>El plan</h3>
+        <ol>
+          <li><a href="#s05"><span>05</span>A quién le hablamos</a></li>
+          <li><a href="#s06"><span>06</span>El objetivo</a></li>
+          <li><a href="#s07"><span>07</span>Videos que funcionan</a></li>
+          <li><a href="#s08"><span>08</span>Contenido</a></li>
+          <li><a href="#s09"><span>09</span>Cómo llegan las consultas</a></li>
+          <li><a href="#s10"><span>10</span>Perfil</a></li>
+          <li><a href="#s11"><span>11</span>Producción</a></li>
+          <li><a href="#s12"><span>12</span>Medición</a></li>
+          <li><a href="#s13"><span>13</span>Próximos pasos</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="parte-sep" id="parte-1">
+  <div class="env parte-sep__in">
+    <span class="rot rot--nar">Parte 1</span>
+    <p class="parte-sep__t">Diagnóstico</p>
+    <p class="parte-sep__q">Dónde está hoy MIOMIO, qué tiene a favor y en qué contexto compite.</p>
+  </div>
+</div>
+<section id="s02">
+  <div class="env">
+    <div class="tapa">
+      <span class="rot rot--nar">Parte 1 · 02</span>
+      <h2>Situación actual</h2>
+    </div>
+
+    <div class="intro">
+      <p class="intro__lead">Una fábrica <em>que nadie encuentra.</em></p>
+      <p class="intro__txt">Ya produce y le vende por mayor a comercios de todo el país. Tiene planta,
+      depósito, clientes y catálogo. <b>Lo que no tiene es dónde mostrarlo.</b></p>
+    </div>
+
+    <div class="cifras aparece">
+      <div class="cifra cifra--gris">
+        <span class="rot">El catálogo 2026</span>
+        <span class="cifra__n" data-cuenta="42">42</span>
+        <span class="cifra__q">páginas, en cuatro secciones y con código por artículo.</span>
+      </div>
+      <div class="cifra cifra--nar">
+        <span class="rot rot--nar">Redes de la marca</span>
+        <span class="cifra__n">0</span>
+        <span class="cifra__q">Ni Instagram ni Facebook. La web muestra la página que pone el hosting.</span>
+      </div>
+      <p class="cifras__pie">El catálogo está armado. El que lo recibe y busca la marca no encuentra nada.</p>
+    </div>
+
+    <figure class="tablero" style="margin-left:0;margin-right:0" aria-labelledby="tab-t">
+      <div class="tablero__cab">
+        <h3 id="tab-t">Canal por canal</h3>
+        <span>Revisado el 25 de octubre de 2026.</span>
+      </div>
+      <div class="cols">
+        <div class="col col--al">
+          <span class="rot">Funciona</span>
+          <span class="col__n">1</span>
+          <ul class="canales">
+            <li><b>Venta por catálogo</b><span>Es como consiguen clientes hoy. Contesta Diego.</span></li>
+          </ul>
+        </div>
+        <div class="col col--atras">
+          <span class="rot">Existe, pero no alcanza</span>
+          <span class="col__n">2</span>
+          <ul class="canales">
+            <li><b>miomioplasticos.com</b><span>El dominio está, la web no.</span></li>
+            <li><b>Logo</b><span>Sin un sistema visual detrás.</span></li>
+          </ul>
+        </div>
+        <div class="col col--no">
+          <span class="rot rot--nar">No existe</span>
+          <span class="col__n">2</span>
+          <ul class="canales">
+            <li><b>Instagram</b><span>Sin cuenta.</span></li>
+            <li><b>Facebook</b><span>Sin página.</span></li>
+          </ul>
+        </div>
+      </div>
+    </figure>
+
+    <div class="intro s02-puntos">
+      <p class="intro__lead">Al catálogo le falta <em>justo lo que más les preguntan.</em></p>
+      <ol class="nadie">
+        <li><span><b>Precio por cantidad.</b> No dice desde cuánto es «por mayor».</span></li>
+        <li><span><b>Pago, envío y pedido mínimo.</b> No figuran en ningún lado.</span></li>
+        <li><span><b>Las fotos de portada.</b> ¿Son reales o generadas? En redes, una foto generada que pasa por real resta confianza.</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section id="s03">
+  <div class="env">
+    <div class="tapa">
+      <span class="rot rot--nar">Parte 1 · 03</span>
+      <h2>Lo que ya tienen</h2>
+    </div>
+
+    <div class="intro">
+      <p class="intro__lead">Tres cosas que ya tienen <em>y otras fábricas no aprovechan.</em></p>
+      <p class="intro__txt">Un producto que se entiende en un video, una planta que se puede filmar y comercios que ya lo venden.</p>
+    </div>
+
+    <ol class="fichas">
+      <li class="ficha" id="act-1">
+        <div>
+          <p class="ficha__id"><span class="rot rot--nar">1</span></p>
+          <h3>Un producto que se explica solo</h3>
+          <p>Útil, con colores y para la casa. Se entiende en un video de diez segundos.</p>
+        </div>
+        <div class="prueba">
+          <span class="rot">Las cuatro secciones del catálogo</span>
+          <ul class="cartera">
+            <li>Cocina</li>
+            <li>Baño</li>
+            <li>Limpieza</li>
+            <li>Organización</li>
+          </ul>
+          <p class="sitio__nota">Coladores, herméticos, jarras, baldes, canastos, perchas y más.</p>
+        </div>
+      </li>
+
+      <li class="ficha" id="act-2">
+        <div>
+          <p class="ficha__id"><span class="rot rot--nar">2</span></p>
+          <h3>Una fábrica que se puede filmar</h3>
+          <p>Dejan grabar todo, y alguien del equipo se anima a salir a cámara.</p>
+        </div>
+        <div class="prueba">
+          <span class="rot">Lo que se puede mostrar</span>
+          <ol class="cadena">
+            <li><b>La máquina</b><span>La pieza saliendo, con sus colores.</span></li>
+            <li><b>El depósito</b><span>El stock a la vista.</span></li>
+            <li><b>El despacho</b><span>El pedido que sale a otra provincia.</span></li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="ficha" id="act-3">
+        <div>
+          <p class="ficha__id"><span class="rot rot--nar">3</span></p>
+          <h3>Comercios que ya venden MIOMIO</h3>
+        </div>
+        <div class="prueba">
+          <span class="rot">Hoy le venden a</span>
+          <ul class="cartera">
+            <li>Bazares</li>
+            <li>Supermercados</li>
+            <li>Comercios</li>
+            <li class="mas">en todo el país</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+
+    <figure class="versus tachar" style="margin-left:0;margin-right:0;margin-top:0;padding-bottom:110px">
+      <div class="intro" style="padding:0 0 40px">
+        <p class="intro__lead">«Disponibilidad, calidad y precio» <em>lo dice cualquier proveedor.</em></p>
+        <p class="intro__txt">Es lo que los diferencia, según ustedes. Por eso no alcanza con decirlo: hay que mostrarlo.</p>
+      </div>
+      <table>
+        <colgroup><col class="c1"><col><col></colgroup>
+        <thead><tr><th><span class="a11y">Diferencial</span></th><th>Decirlo</th><th class="h-so">Mostrarlo</th></tr></thead>
+        <tbody>
+          <tr style="--i:0"><th>Disponibilidad</th><td class="c-ch" data-col="Decirlo"><span class="tacha">«Tenemos stock»</span></td><td class="c-so" data-col="Mostrarlo"><span>El depósito lleno y el camión que sale</span></td></tr>
+          <tr style="--i:1"><th>Calidad</th><td class="c-ch" data-col="Decirlo"><span class="tacha">«Productos de primera»</span></td><td class="c-so" data-col="Mostrarlo"><span>La pieza saliendo de la máquina</span></td></tr>
+          <tr style="--i:2"><th>Precio</th><td class="c-ch" data-col="Decirlo"><span class="tacha">«Precios competitivos»</span></td><td class="c-so" data-col="Mostrarlo"><span>Hecho acá, sin esperar un contenedor. El número, por WhatsApp</span></td></tr>
+        </tbody>
+      </table>
+    </figure>
+  </div>
+</section>
+
+<section id="s04">
+  <div class="env">
+    <div class="tapa">
+      <span class="rot rot--nar">Parte 1 · 04</span>
+      <h2>Contexto y FODA</h2>
+    </div>
+
+    <div class="intro">
+      <p class="intro__lead">El rival no es otra fábrica. <em>Es lo importado.</em></p>
+      <div>
+        <span class="rot">Cómo viene el sector</span>
+        <ol class="nadie">
+          <li><span><b>Ustedes lo nombraron como competencia</b> en el formulario.</span></li>
+          <li><span><b>Diciembre de 2025: el sector caucho y plástico usó el 33,4 % de su capacidad.</b> AAACI, con datos de INDEC.</span></li>
+          <li><span><b>Primer trimestre de 2026: cayó la producción pyme</b>, con más importado chino. Fundación Observatorio PyME.</span></li>
+        </ol>
+      </div>
+    </div>
+
+
+    <div class="foda" style="margin-top:96px">
+      <span class="foda__esq" aria-hidden="true"></span>
+      <span class="rot foda__col" aria-hidden="true">A favor</span>
+      <span class="rot rot--nar foda__col foda__col--neg" aria-hidden="true">En contra</span>
+
+      <span class="rot foda__fila" aria-hidden="true"><span>Interno</span></span>
+      <div class="cuad" style="--q:0">
+        <span class="rot cuad__eje">Interno · a favor</span>
+        <div class="cuad__cab"><span class="cuad__letra" aria-hidden="true">F</span><h3>Fortalezas</h3><span class="cuad__n">5</span></div>
+        <ul>
+          <li>Fábrica propia en el país</li>
+          <li>Línea ancha en cuatro rubros, con colores</li>
+          <li>Catálogo ordenado y con código</li>
+          <li>Clientes en bazares, súper y comercios</li>
+          <li>Permiso para grabar todo</li>
+        </ul>
+      </div>
+      <div class="cuad cuad--neg" style="--q:1">
+        <span class="rot rot--nar cuad__eje">Interno · en contra</span>
+        <div class="cuad__cab"><span class="cuad__letra" aria-hidden="true">D</span><h3>Debilidades</h3><span class="cuad__n">5</span></div>
+        <ul>
+          <li>Sin redes ni web</li>
+          <li>Un diferencial que dice cualquiera</li>
+          <li>Catálogo sin condiciones de venta</li>
+          <li>Logo sin sistema visual</li>
+          <li>Una sola persona para contestar</li>
+        </ul>
+      </div>
+
+      <span class="rot foda__fila" aria-hidden="true"><span>Externo</span></span>
+      <div class="cuad" style="--q:2">
+        <span class="rot cuad__eje">Externo · a favor</span>
+        <div class="cuad__cab"><span class="cuad__letra" aria-hidden="true">O</span><h3>Oportunidades</h3><span class="cuad__n">4</span></div>
+        <ul>
+          <li>El comercio busca un proveedor que no falle con el stock</li>
+          <li>El producto de la casa anda bien en video</li>
+          <li>Las fábricas del rubro comunican mal en redes</li>
+          <li>Las temporadas ordenan el contenido solas</li>
+        </ul>
+      </div>
+      <div class="cuad cuad--neg" style="--q:3">
+        <span class="rot rot--nar cuad__eje">Externo · en contra</span>
+        <div class="cuad__cab"><span class="cuad__letra" aria-hidden="true">A</span><h3>Amenazas</h3><span class="cuad__n">4</span></div>
+        <ul>
+          <li>Importado más barato</li>
+          <li>Demanda interna débil en 2026</li>
+          <li>Gente que quiere comprar de a uno</li>
+          <li>Las cadenas compran con condiciones exigentes</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="existe" style="margin-top:0">
+      <div class="bloque">
+        <span class="rot">Fortaleza + oportunidad</span>
+        <h3>Lo que hay que mostrar</h3>
+        <p>Lo importado depende del contenedor. MIOMIO puede filmar el depósito, el pedido y el despacho. Ese es el eje de la cuenta.</p>
+      </div>
+      <div class="bloque">
+        <span class="rot rot--nar">Debilidad + amenaza</span>
+        <h3>Lo que hay que resolver antes</h3>
+        <p>Un reel de un colador lo ve gente que quiere <b>un</b> colador. Sin una respuesta lista, la cuenta se llena de consultas que no venden.</p>
+      </div>
+    </div>
+
+    <div style="padding-bottom:110px"></div>
+  </div>
+</section>
+
+<!-- ══════════ PARTE 2 · EL PLAN ══════════ -->
+
+<div class="parte-sep" id="parte-2">
+  <div class="env parte-sep__in">
+    <span class="rot rot--nar">Parte 2</span>
+    <p class="parte-sep__t">El plan</p>
+    <p class="parte-sep__q">A quién se le habla, con qué videos, cómo llega la consulta y cómo se mide.</p>
+  </div>
+</div>
+
+<section id="s05">  <div class="env">
+    <div class="tapa">
+      <span class="rot rot--nar">Parte 2 · 05</span>
+      <h2>A quién le hablamos</h2>
+    </div>
+
+    <div class="intro">
+      <p class="intro__lead">La cuenta le habla <em>al comercio.</em></p>
+      <p class="intro__txt">Se vende solo por mayor, así que cada video está pensado para quien compra para revender. El que usa los productos en su casa también va a mirar: suma alcance, pero no es a quien le apuntamos.</p>
+    </div>
+
+    <div class="personas">
+      <article class="persona" style="--q:0">
+        <p class="persona__tipo"><span class="rot rot--nar">Persona 1</span><span class="rot">La que compra</span></p>
+        <h3>Norma</h3>
+        <p class="persona__rol">Dueña o encargada de un bazar o comercio de barrio</p>
+        <p class="persona__sit">Repone todas las semanas. No se puede quedar con la góndola vacía.</p>
+        <dl>
+          <div><dt>Qué pregunta</dt><dd>Precio por cantidad, pago y envío.</dd></div>
+          <div><dt>Qué la frena</dt><dd>Que el proveedor nuevo no cumpla el segundo pedido.</dd></div>
+        </dl>
+      </article>
+      <article class="persona" style="--q:1">
+        <p class="persona__tipo"><span class="rot rot--nar">Persona 2</span><span class="rot">La que verifica</span></p>
+        <h3>Gustavo</h3>
+        <p class="persona__rol">Comprador de una cadena de súper o mayorista</p>
+        <p class="persona__sit">Busca un segundo proveedor o sustituir importado. Compra en reunión.</p>
+        <dl>
+          <div><dt>Qué mira</dt><dd>Capacidad, stock y que la empresa sea seria.</dd></div>
+          <div><dt>Qué lo frena</dt><dd>Un proveedor chico que no llegue al volumen.</dd></div>
+        </dl>
+      </article>
+      <article class="persona" style="--q:2">
+        <p class="persona__tipo"><span class="rot">De rebote</span><span class="rot">No es el objetivo</span></p>
+        <h3>El de la casa</h3>
+        <p class="persona__rol">Usa los productos todos los días</p>
+        <p class="persona__sit">No le compra a MIOMIO. Si le gusta lo que ve, se lo pide a su bazar.</p>
+        <dl>
+          <div><dt>Qué hace la cuenta por él</dt><dd>Nada aparte: ve los mismos videos que el comercio.</dd></div>
+          <div><dt>Qué hay que resolver</dt><dd>Qué se le contesta si quiere comprar de a uno.</dd></div>
+        </dl>
+      </article>
+    </div>
+
+    <div class="cruce" style="padding-bottom:110px">
+      <div class="cruce__ramas" aria-hidden="true"><i></i><i></i><i></i></div>
+      <p class="cruce__txt">Los tres quieren ver lo mismo: <em>que hay stock y que llega.</em></p>
+    </div>
+  </div>
+</section>
+
+<section id="s06">
+  <div class="env">
+    <div class="tapa">
+      <span class="rot rot--nar">Parte 2 · 06</span>
+      <h2>El objetivo</h2>
+    </div>
+
+    <div class="intro">
+      <p class="intro__lead">No se mide en seguidores. <em>Se mide en comercios que escriben.</em></p>
+      <p class="intro__txt">Es el cambio que ordena todo lo demás: qué se graba, cómo cierra cada video y qué se reporta a fin de mes.</p>
+    </div>
+
+    <div class="giro" style="margin-top:56px">
+      <div class="giro__lado giro__lado--antes" style="--q:0">
+        <span class="rot">Lo que pidieron</span>
+        <h3>Dar a conocer la marca.</h3>
+        <p>Es el punto de partida: hoy nadie la encuentra.</p>
+      </div>
+      <div class="giro__flecha" style="--q:1" aria-hidden="true">
+        <svg viewBox="0 0 38 38" fill="none"><path d="M3 19h30M23 9l10 10-10 10" stroke="currentColor" stroke-width="2.4"/></svg>
+      </div>
+      <div class="giro__lado giro__lado--nuevo" style="--q:2">
+        <span class="rot rot--nar">Cómo lo medimos</span>
+        <h3>Comercios que escriben por WhatsApp.</h3>
+        <p>Conocerla sirve si termina en un pedido.</p>
+      </div>
+    </div>
+
+    <figure class="versus s07-cambia" aria-labelledby="cb-t" style="padding-bottom:110px">
+      <div class="tablero__cab">
+        <h3 id="cb-t">Qué cambia con eso</h3>
+      </div>
+      <table>
+        <colgroup><col class="c1"><col><col></colgroup>
+        <thead>
+          <tr><th scope="col"><span class="a11y">Qué cambia</span></th><th scope="col">Si el objetivo fueran seguidores</th><th scope="col" class="h-so">Con consultas de comercios</th></tr>
+        </thead>
+        <tbody>
+          <tr style="--i:0"><th scope="row">Qué se mide</th><td class="c-ant" data-col="Seguidores">Seguidores y me gusta</td><td class="c-nue" data-col="Consultas"><span>Consultas mayoristas, por origen</span></td></tr>
+          <tr style="--i:1"><th scope="row">Cómo cierra cada video</th><td class="c-ant" data-col="Seguidores">«Seguinos»</td><td class="c-nue" data-col="Consultas"><span>«Comentá CATÁLOGO o mandanos un mensaje»</span></td></tr>
+          <tr style="--i:2"><th scope="row">Qué se muestra</th><td class="c-ant" data-col="Seguidores">Lo que da más vistas</td><td class="c-nue" data-col="Consultas"><span>Stock, fábrica y producto en uso</span></td></tr>
+        </tbody>
+      </table>
+    </figure>
+  </div>
+</section>
+
+<section id="s07">
+  <div class="env">
+    <div class="tapa">
+      <span class="rot rot--nar">Parte 2 · 07</span>
+      <h2>Videos que funcionan</h2>
+    </div>
+
+    <div class="intro">
+      <p class="intro__lead">Ocho videos de cinco cuentas. <em>Debajo de cada uno, qué se toma para MIOMIO.</em></p>
+      <p class="intro__txt">Rodo vende electrodomésticos; Cerri y Pontevedra son fábricas de plástico; Cintek, de metal; Microbottles, de envases. Ninguna se copia entera: se toma la mecánica.</p>
+    </div>
+
+    <figure class="fig refs" aria-labelledby="rf-t">
+      <div class="tablero__cab">
+        <h3 id="rf-t">Las referencias</h3>
+        <span>Relevadas el 26 de octubre de 2026.</span>
+      </div>
+      <ol class="fmtv fmtv--3 aparece">        <li class="fv">
+          <div class="fv__vid"><video src="videos/cintek-DcOw-LpMRhh.mp4" poster="videos/cintek-DcOw-LpMRhh.jpg" controls playsinline preload="none" title="Grupo Cintek: si tenés un local y revendés"></video></div>
+          <span class="fv__n">Grupo Cintek · @cintek.ar</span>
+          <h4>«Si tenés un local y revendés…»</h4>
+          <p class="fv__req"><span class="rot rot--nar">Para MIOMIO</span>El primer reel que se sube (formato 01): hablarle directo al que revende y cerrar con «escribinos».</p>
+          <p class="fv__fuente"><a href="https://www.instagram.com/p/DcOw-LpMRhh/" target="_blank" rel="noopener">Ver en Instagram</a></p>
+        </li>        <li class="fv">
+          <div class="fv__vid"><video src="videos/cintek-Dee7ycJMDoA.mp4" poster="videos/cintek-Dee7ycJMDoA.jpg" controls playsinline preload="none" title="Cintek: el diálogo del container"></video></div>
+          <span class="fv__n">Grupo Cintek · @cintek129</span>
+          <h4>«¿Qué container?»</h4>
+          <p class="fv__req"><span class="rot rot--nar">Para MIOMIO</span>El segundo (formato 02): contestarle al importado. Hecho acá y con stock.</p>
+          <p class="fv__fuente"><a href="https://www.instagram.com/p/Dee7ycJMDoA/" target="_blank" rel="noopener">Ver en Instagram</a></p>
+        </li>
+        <li class="fv">
+          <div class="fv__vid"><video src="videos/rodo-Dc1oH4UvAPJ.mp4" poster="videos/rodo-Dc1oH4UvAPJ.jpg" controls playsinline preload="none" title="Rodo: helado infinito por 30.000 pesos"></video></div>
+          <span class="fv__n">Rodo · 875 mil vistas</span>
+          <h4>«Helado infinito por $30.000»</h4>
+          <p class="fv__req"><span class="rot rot--nar">Para MIOMIO</span>La plata en la primera frase: «¿Qué surtido armás para tu bazar con $X?».</p>
+          <p class="fv__fuente"><a href="https://www.instagram.com/reel/Dc1oH4UvAPJ/" target="_blank" rel="noopener">Ver en Instagram</a></p>
+        </li>        <li class="fv">
+          <div class="fv__vid"><video src="videos/rodo-DehvZ4fnLgP.mp4" poster="videos/rodo-DehvZ4fnLgP.jpg" controls playsinline preload="none" title="Rodo: escena de familia con milanesas"></video></div>
+          <span class="fv__n">Rodo · 1.796 vistas</span>
+          <h4>«Cuando tus milanesas…»</h4>
+          <p class="fv__req"><span class="rot">Lo que no se copia</span>Escenas armadas sin nadie que hable: de las que menos rindieron.</p>
+          <p class="fv__fuente"><a href="https://www.instagram.com/reel/DehvZ4fnLgP/" target="_blank" rel="noopener">Ver en Instagram</a></p>
+        </li>        <li class="fv">
+          <div class="fv__vid"><video src="videos/cerri-DbhLxTlOm6b.mp4" poster="videos/cerri-DbhLxTlOm6b.jpg" controls playsinline preload="none" title="Plásticos Cerri: contenedores en el depósito"></video></div>
+          <span class="fv__n">Plásticos Cerri · 733 mil vistas</span>
+          <h4>«Un laboratorio, una panadería y una granja»</h4>
+          <p class="fv__req"><span class="rot rot--nar">Para MIOMIO</span>Una persona fija a cámara, entre pallets: un producto y sus usos.</p>
+          <p class="fv__fuente"><a href="https://www.instagram.com/reel/DbhLxTlOm6b/" target="_blank" rel="noopener">Ver en Instagram</a></p>
+        </li>        <li class="fv">
+          <div class="fv__vid"><video src="videos/cerri-De5fkHZg8yN.mp4" poster="videos/cerri-De5fkHZg8yN.jpg" controls playsinline preload="none" title="Plásticos Cerri: caja organizadora en una casa"></video></div>
+          <span class="fv__n">Plásticos Cerri · 5.257 vistas</span>
+          <h4>«¿Te quedó chico el cajón?»</h4>
+          <p class="fv__req"><span class="rot rot--nar">Para MIOMIO</span>La demostración, pero contada al comercio: por qué se vende (formato 06).</p>
+          <p class="fv__fuente"><a href="https://www.instagram.com/reel/De5fkHZg8yN/" target="_blank" rel="noopener">Ver en Instagram</a></p>
+        </li>        <li class="fv">
+          <div class="fv__vid"><video src="videos/pontevedra-Ddtj-irB3m3.mp4" poster="videos/pontevedra-Ddtj-irB3m3.jpg" controls playsinline preload="none" title="Plásticos Pontevedra: así fabricamos nuestros envases"></video></div>
+          <span class="fv__n">Pontevedra · 59,9 mil vistas</span>
+          <h4>«Así fabricamos nuestros envases»</h4>
+          <p class="fv__req"><span class="rot rot--nar">Para MIOMIO</span>El recorrido por la planta (formato 03), cerrando en «consultanos por cantidades».</p>
+          <p class="fv__fuente"><a href="https://www.instagram.com/reel/Ddtj-irB3m3/" target="_blank" rel="noopener">Ver en Instagram</a></p>
+        </li>        <li class="fv">
+          <div class="fv__vid"><video src="videos/cintek-Da6XCIMur0r.mp4" poster="videos/cintek-Da6XCIMur0r.jpg" controls playsinline preload="none" title="Microbottles: de preforma a envase"></video></div>
+          <span class="fv__n">Microbottles · @microbottles</span>
+          <h4>«¿Cómo logramos que esto se convierta en esto?»</h4>
+          <p class="fv__req"><span class="rot rot--nar">Para MIOMIO</span>La inyectora paso a paso, con el nombre de cada máquina en pantalla (formato 03).</p>
+          <p class="fv__fuente"><a href="https://www.instagram.com/reel/Da6XCIMur0r/" target="_blank" rel="noopener">Ver en Instagram</a></p>
+        </li>
+      </ol>
+    </figure>
+
+    <figure class="versus" aria-labelledby="ad-t" style="padding-bottom:110px">
+      <div class="tablero__cab">
+        <h3 id="ad-t">Cómo se aplica a MIOMIO</h3>
+        <span>Lo que se repite en los que rinden.</span>
+      </div>
+      <table>
+        <colgroup><col class="c1"><col><col></colgroup>
+        <thead><tr><th scope="col"><span class="a11y">Parte</span></th><th scope="col">En las referencias</th><th scope="col" class="h-so">En MIOMIO</th></tr></thead>
+        <tbody>
+          <tr style="--i:0"><th scope="row">El gancho</th><td class="c-ch" data-col="Referencias">Plata en la primera frase</td><td class="c-so" data-col="MIOMIO"><span>«¿Qué surtido armás para tu bazar con $X?»</span></td></tr>
+          <tr style="--i:1"><th scope="row">Dónde</th><td class="c-ch" data-col="Referencias">El depósito y la planta</td><td class="c-so" data-col="MIOMIO"><span>La inyectora, el depósito y el despacho</span></td></tr>
+          <tr style="--i:2"><th scope="row">Quién</th><td class="c-ch" data-col="Referencias">Siempre la misma persona</td><td class="c-so" data-col="MIOMIO"><span>Una persona fija del equipo, a definir</span></td></tr>
+          <tr style="--i:3"><th scope="row">A quién</th><td class="c-ch" data-col="Referencias">Al que revende</td><td class="c-so" data-col="MIOMIO"><span>Al bazar y al súper, nunca al de a uno</span></td></tr>
+          <tr style="--i:4"><th scope="row">El cierre</th><td class="c-ch" data-col="Referencias">«Escribinos», «consultanos»</td><td class="c-so" data-col="MIOMIO"><span>«Comentá CATÁLOGO o mandanos un mensaje»</span></td></tr>
+        </tbody>
+      </table>
+      <p class="bq-nota">Los montos los definimos con ustedes. Ninguna cifra sale publicada sin que la validen.</p>
+    </figure>
+  </div>
+</section>
+
+<section id="s08">
+  <div class="env">
+    <div class="tapa">
+      <span class="rot rot--nar">Parte 2 · 08</span>
+      <h2>Contenido</h2>
+    </div>
+
+    <div class="intro">
+      <p class="intro__lead">Cinco temas y seis formatos. <em>Todo sale de la planta y el depósito.</em></p>
+      <p class="intro__txt">Nada de fotos generadas ni renders: cada pieza muestra algo real.</p>
+    </div>
+
+    <figure class="fig temas" aria-labelledby="tm-t">
+      <div class="tablero__cab">
+        <h3 id="tm-t">Los cinco temas, y cuánto pesa cada uno</h3>
+        <span>De cada diez reels.</span>
+      </div>
+      <div class="barra100" aria-hidden="true">
+        <i style="flex:4;--c:var(--naranja);--q:0"></i><i style="flex:2;--c:rgba(245,244,242,.8);--q:1"></i><i style="flex:2;--c:rgba(245,244,242,.52);--q:2"></i><i style="flex:1;--c:rgba(245,244,242,.32);--q:3"></i><i style="flex:1;--c:rgba(245,244,242,.18);--q:4"></i>
+      </div>
+      <ol class="temas__lista">
+        <li class="tema" style="--c:var(--naranja)"><span class="tema__pct">4</span><h4>Para tu comercio</h4><p>Qué se mueve en cada temporada, qué surtido armar, cómo se pide.</p></li>
+        <li class="tema" style="--c:rgba(245,244,242,.8)"><span class="tema__pct">2</span><h4>Stock y despacho</h4><p>El depósito lleno y el pedido que sale. La respuesta al importado.</p></li>
+        <li class="tema" style="--c:rgba(245,244,242,.52)"><span class="tema__pct">2</span><h4>Así se hace</h4><p>La pieza saliendo de la máquina, con sonido real.</p></li>
+        <li class="tema" style="--c:rgba(245,244,242,.32)"><span class="tema__pct">1</span><h4>Por qué se vende</h4><p>El producto en uso, contado para el que lo revende: por qué rota en góndola.</p></li>
+        <li class="tema" style="--c:rgba(245,244,242,.18)"><span class="tema__pct">1</span><h4>Dónde está MIOMIO</h4><p>Comercios que ya lo venden, con su permiso.</p></li>
+      </ol>
+    </figure>
+
+    <figure class="fig tabla" aria-labelledby="fm-t" style="padding-bottom:110px">
+      <div class="tablero__cab">
+        <h3 id="fm-t">Los seis formatos</h3>
+        <span>Uno por semana. El primer mes salen del 01 al 04.</span>
+      </div>
+      <table>
+        <colgroup><col style="width:28%"><col><col style="width:18%"></colgroup>
+        <thead><tr><th scope="col">Formato</th><th scope="col">Cómo es</th><th scope="col">Etapa</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">01 · «Si tenés un comercio…»</th><td data-col="Cómo es">La persona de MIOMIO, en la planta, le habla directo al que revende: comprale a la fábrica, hay stock, escribinos. Es la mecánica de Cintek.</td><td data-col="Etapa">BOFU · Norma</td></tr>
+          <tr><th scope="row">02 · «¿Qué container?»</th><td data-col="Cómo es">Un diálogo corto: alguien pregunta cuándo llega el container y la respuesta es que se fabrica acá, con el depósito lleno atrás.</td><td data-col="Etapa">MOFU · Norma y Gustavo</td></tr>
+          <tr><th scope="row">03 · Así sale</th><td data-col="Cómo es">La máquina, el molde y los colores, con el nombre de cada paso en pantalla y el sonido de la planta.</td><td data-col="Etapa">TOFU · Todos</td></tr>
+          <tr><th scope="row">04 · ¿Qué armás con $X?</th><td data-col="Cómo es">La persona de MIOMIO arma un surtido en el depósito con un monto. Es la fórmula de Rodo.</td><td data-col="Etapa">BOFU · Norma</td></tr>
+          <tr><th scope="row">05 · Se va a…</th><td data-col="Cómo es">El pedido armado y el camión que sale, con la provincia de destino.</td><td data-col="Etapa">MOFU · Norma y Gustavo</td></tr>
+          <tr><th scope="row">06 · Lo que más sale</th><td data-col="Cómo es">El artículo que más rota, en uso y contado al comercio: qué problema le resuelve a su cliente y por qué conviene tenerlo en la góndola.</td><td data-col="Etapa">TOFU · Norma</td></tr>
+        </tbody>
+      </table>
+    </figure>
+  </div>
+</section>
+
+<section id="s09">
+  <div class="env">
+    <div class="tapa">
+      <span class="rot rot--nar">Parte 2 · 09</span>
+      <h2>Cómo llegan las consultas</h2>
+    </div>
+
+    <div class="intro">
+      <p class="intro__lead">Del video al pedido, <em>todo termina en el WhatsApp de Diego.</em></p>
+      <p class="intro__txt">Es el embudo de venta en tres partes. <b>TOFU</b> (arriba): el comercio que todavía no conoce a MIOMIO. <b>MOFU</b> (el medio): el que ya la vio y está viendo si es un proveedor serio. <b>BOFU</b> (abajo): el que necesita surtido y está listo para pedir. Cada video apunta a una etapa y pide una sola cosa.</p>
+    </div>
+
+    <figure class="fig" aria-labelledby="em-t">
+      <div class="tablero__cab">
+        <h3 id="em-t">Tres etapas</h3>
+      </div>
+      <div class="embudo__cab" aria-hidden="true"><span class="rot">Etapa</span><span class="rot">Qué ve</span><span class="rot">Qué se le pide</span></div>
+      <ol class="embudo">
+        <li class="esc" style="--w:100%;--q:0">
+          <div class="esc__forma"><span class="esc__barra"><span class="esc__n">TOFU</span><b>Que la conozcan</b></span></div>
+          <div><p class="esc__mom">No sabe que MIOMIO existe.</p><p class="esc__come">Así sale · Lo que más sale</p></div>
+          <span class="estado estado--gris">Que mire y comparta</span>
+        </li>
+        <li class="esc" style="--w:76%;--q:1">
+          <div class="esc__forma"><span class="esc__barra"><span class="esc__n">MOFU</span><b>Que confíen</b></span></div>
+          <div><p class="esc__mom">Ya la vio una vez.</p><p class="esc__come">¿Qué container? · Se va a…</p></div>
+          <span class="estado estado--gris">Que siga la cuenta</span>
+        </li>
+        <li class="esc esc--ok" style="--w:52%;--q:2">
+          <div class="esc__forma"><span class="esc__barra"><span class="esc__n">BOFU</span><b>Que escriban</b></span></div>
+          <div><p class="esc__mom">Tiene un comercio y necesita surtido.</p><p class="esc__come">Si tenés un comercio… · ¿Qué armás con $X?</p></div>
+          <span class="estado">«Comentá CATÁLOGO o mandanos un mensaje»</span>
+        </li>
+      </ol>
+    </figure>
+
+    <div class="decision" style="padding-bottom:110px">
+      <div>
+        <span class="rot rot--nar">La respuesta, automática</span>
+        <h3>El catálogo y tres preguntas</h3>
+        <p>El que comenta CATÁLOGO o escribe recibe el PDF y tres preguntas. Diego retoma con la consulta ya ordenada.</p>
+        <p style="margin-top:14px">Y el que quiere comprar de a uno recibe otra respuesta. A dónde lo mandamos lo definimos con ustedes.</p>
+      </div>
+      <figure class="chat" aria-label="Ejemplo de la primera respuesta del WhatsApp de MIOMIO">
+        <div class="chat__cab"><i aria-hidden="true"></i><div><b>MIOMIO</b><span>WhatsApp Business · respuesta automática</span></div></div>
+        <div class="chat__cuerpo aparece">
+          <p class="burbuja burbuja--in">Hola, tengo un bazar. ¿Me pasan el catálogo?</p>
+          <p class="burbuja">¡Hola! Te mandamos el catálogo 2026. Para pasarte precios por cantidad:</p>
+          <div class="burbuja"><ol><li>¿Qué tipo de comercio tenés?</li><li>¿En qué localidad?</li><li>¿Qué artículos buscás?</li></ol></div>
+          <p class="burbuja">Diego te contesta con todo eso.</p>
+        </div>
+        <figcaption class="chat__pie">
+          <span class="rot">Cada consulta se anota con su origen</span>
+          <ul class="chips"><li>Instagram</li><li>Facebook</li><li>Google</li><li>Catálogo</li><li>Recomendación</li></ul>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="s10">
+  <div class="env">
+    <div class="tapa">
+      <span class="rot rot--nar">Parte 2 · 10</span>
+      <h2>Perfil</h2>
+    </div>
+
+    <div class="intro">
+      <p class="intro__lead">Tres líneas y una acción. <em>Así se vería.</em></p>
+      <p class="intro__txt">El comerciante que llega desde el catálogo tiene que entender en cinco segundos qué hacen y cómo se compra. Armado con lo que funciona en Cerri, Pontevedra y Colombraro.</p>
+    </div>
+
+    <div class="perfil" style="padding-bottom:110px">
+      <figure class="ig" aria-label="Cómo se vería el perfil de Instagram de MIOMIO">
+        <div class="ig__cab">
+          <span class="ig__ava" aria-hidden="true">MIOMIO</span>
+          <div>
+            <p class="ig__usu">miomioplasticos</p>
+            <p class="ig__nombre">MIOMIO · Fábrica de plásticos</p>
+            <p class="ig__cat">Fabricante</p>
+          </div>
+        </div>
+        <p class="ig__bio">Artículos plásticos para el hogar<br>🏭 Somos fabricantes · San Pedro, Bs. As.<br>📦 Venta mayorista a comercios de todo el país<br>👇 Pedí el catálogo por WhatsApp</p>
+        <p class="ig__link">🔗 wa.me/549… <span>· número a confirmar</span></p>
+        <div class="ig__bots" aria-hidden="true"><span class="ig__seg">Seguir</span><span>Mensaje</span><span>WhatsApp</span></div>
+        <ul class="ig__dest" aria-label="Destacadas">
+          <li><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14l-1.5 9h-11z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></i><span>Cómo comprar</span></li>
+          <li><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h10l2 2v14H6z"/><path d="M9 9h6M9 13h6M9 17h4"/></svg></i><span>Catálogo</span></li>
+          <li><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 10h14v3a7 7 0 0 1-14 0z"/><path d="M3 10h18"/></svg></i><span>Cocina</span></li>
+          <li><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4c3 4 5 7 5 9.5a5 5 0 0 1-10 0C7 11 9 8 12 4z"/></svg></i><span>Baño</span></li>
+          <li><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9h12l-1.5 11h-9z"/><path d="M9 9V5h6v4"/></svg></i><span>Limpieza</span></li>
+          <li><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16v12H4z"/><path d="M4 8l2-4h12l2 4M10 12h4"/></svg></i><span>Organización</span></li>
+          <li><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20V10l5 3V10l5 3V6h4v14z"/><path d="M3 20h18"/></svg></i><span>La fábrica</span></li>
+          <li><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg></i><span>Envíos</span></li>
+          <li><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-6-6-11a6 6 0 0 1 12 0c0 5-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></svg></i><span>Dónde está</span></li>
+        </ul>
+        <figcaption class="ig__pie">Las destacadas siguen de largo: se desliza, como en Instagram.</figcaption>
+      </figure>
+
+      <div>
+        <ol class="piezas">
+          <li><b>Bio</b><span>Una línea por dato, con emoji, como Pontevedra: qué hacen, que son fábrica, a quién le venden y la acción.</span></li>
+          <li><b>«Somos fabricantes»</b><span>Como Cerri. Es lo que lo separa del importado y del revendedor.</span></li>
+          <li><b>Acción</b><span>Un botón al WhatsApp, con mensaje para comercios. El número, a confirmar.</span></li>
+          <li><b>Destacadas</b><span>Primero cómo se compra y el catálogo. Después las cuatro secciones del catálogo, por ambiente como Colombraro. Al final la fábrica, los envíos y dónde está MIOMIO.</span></li>
+          <li><b>Portadas</b><span>Un ícono de línea sobre el color de la marca, todas iguales. El color sale de la identidad visual.</span></li>
+        </ol>
+        <p class="sitio__nota" style="margin-top:22px">El nombre de usuario lo definimos con ustedes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="s11">
+  <div class="env">
+    <div class="tapa">
+      <span class="rot rot--nar">Parte 2 · 11</span>
+      <h2>Producción</h2>
+    </div>
+
+    <div class="intro">
+      <p class="intro__lead">Un reel por semana. <em>Los cuatro del mes salen de una sola jornada.</em></p>
+      <p class="intro__txt">Grabo en la planta y el depósito. Si no tienen a alguien para grabar, lo consigo yo.</p>
+    </div>
+
+    <figure class="fig tabla semanas" aria-labelledby="sm-t" style="padding-bottom:110px">
+      <div class="tablero__cab">
+        <h3 id="sm-t">Un mes de publicaciones</h3>
+        <span>El primer mes. Desde el segundo se suman el 05 y el 06.</span>
+      </div>
+      <table>
+        <colgroup><col style="width:16%"><col><col><col><col></colgroup>
+        <thead><tr><th scope="col"><span class="a11y">Pieza</span></th><th scope="col">Semana 1</th><th scope="col">Semana 2</th><th scope="col">Semana 3</th><th scope="col">Semana 4</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Reel</th><td data-col="Semana 1"><span class="num">01 · BOFU</span>«Si tenés un comercio…»</td><td data-col="Semana 2"><span class="num">02 · MOFU</span>«¿Qué container?»</td><td data-col="Semana 3"><span class="num">03 · TOFU</span>Así sale</td><td data-col="Semana 4"><span class="num">04 · BOFU</span>¿Qué armás con $X?</td></tr>
+          <tr><th scope="row">Grabación</th><td colspan="4" data-col="Semanas 1 a 4">Una jornada por mes en San Pedro: los cuatro formatos en serie, con la misma persona a cámara.</td></tr>
+        </tbody>
+      </table>
+    </figure>
+  </div>
+</section>
+
+<section id="s12">
+  <div class="env">
+    <div class="tapa">
+      <span class="rot rot--nar">Parte 2 · 12</span>
+      <h2>Medición</h2>
+    </div>
+
+    <div class="intro">
+      <p class="intro__lead">Cinco números. <em>El que manda es el primero.</em></p>
+      <p class="intro__txt">Hoy no se registra ninguno: arrancamos de cero y el primer informe llega a fin del mes 1.</p>
+    </div>
+
+    <figure class="fig" aria-labelledby="md-t">
+      <div class="tablero__cab">
+        <h3 id="md-t">Lo que se mide</h3>
+        <span>Un reporte por mes.</span>
+      </div>
+      <div class="kpis__cab" aria-hidden="true"><span></span><span class="rot">Indicador</span><span class="rot">Hoy</span></div>
+      <ol class="kpis aparece">
+        <li class="kpi"><div><h4>Consultas mayoristas por WhatsApp</h4><p>La métrica principal.</p></div><p class="kpi__hoy"><b>—</b><span>No se registra</span></p></li>
+        <li class="kpi"><div><h4>De dónde llegó cada una</h4><p>Instagram, Facebook, Google, catálogo o recomendación.</p></div><p class="kpi__hoy"><b>—</b><span>No se registra</span></p></li>
+        <li class="kpi"><div><h4>Cuántas son de comercios</h4><p>Y cuántas de gente que quiere comprar de a uno.</p></div><p class="kpi__hoy"><b>—</b><span>No se registra</span></p></li>
+        <li class="kpi"><div><h4>Alcance y compartidos</h4><p>Es como se mide «dar a conocer la marca».</p></div><p class="kpi__hoy"><b>—</b><span>Sin cuenta</span></p></li>
+        <li class="kpi"><div><h4>Costo por conversación</h4><p>Cuando entre la publicidad.</p></div><p class="kpi__hoy"><b>—</b><span>Sin pauta</span></p></li>
+      </ol>
+    </figure>
+
+    <div class="dos aparece" style="padding-bottom:110px">
+      <div class="bloque">
+        <span class="rot">Por qué no encabezan los seguidores</span>
+        <h3>Un bazar que escribe pesa más que mil me gusta</h3>
+        <p>Los seguidores se miran, pero no son el objetivo.</p>
+      </div>
+      <div class="bloque bloque--regla">
+        <span class="rot rot--nar">Lo que no se promete</span>
+        <h3>Ni un número de consultas ni de ventas</h3>
+        <p>Se muestra el criterio. Las metas se fijan al cierre del mes 1, con datos propios.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="s13">
+  <div class="env">
+    <div class="tapa">
+      <span class="rot rot--nar">Parte 2 · 13</span>
+      <h2>Próximos pasos</h2>
+    </div>
+
+    <div class="intro">
+      <p class="intro__lead">Quién hace qué, <em>y qué necesito para arrancar.</em></p>
+      <p class="intro__txt">Lo que hago yo, lo que queda de su lado y las seis respuestas que faltan.</p>
+    </div>
+    <div class="existe" style="margin-top:56px">
+      <div class="bloque">
+        <span class="rot">Lo que hago yo</span>
+        <h3>Todo, de la estrategia a la publicación</h3>
+        <p>Perfil, guiones, grabación, edición, publicación semanal, respuesta automática de WhatsApp y reporte mensual. La publicidad, cuando la sumemos.</p>
+      </div>
+      <div class="bloque">
+        <span class="rot rot--nar">Lo que queda de su lado</span>
+        <h3>Abrir la planta y contestar</h3>
+        <p>Alguien a cámara, Diego con las consultas y las condiciones de venta por escrito.</p>
+      </div>
+    </div>
+
+    <div class="intro" style="padding:110px 0 110px">
+      <p class="intro__lead">Para arrancar, <em>necesito que me confirmen.</em></p>
+      <ol class="nadie">
+        <li><span><b>¿Siguen haciendo algo a medida, o importando y exportando?</b></span></li>
+        <li><span><b>¿Desde qué cantidad o monto es por mayor?</b></span></li>
+        <li><span><b>¿Cómo se paga, cómo se envía y a dónde?</b></span></li>
+        <li><span><b>¿Qué le contestamos al que quiere comprar de a uno?</b></span></li>
+        <li><span><b>¿Quién sale a cámara?</b></span></li>
+        <li><span><b>¿Qué número de WhatsApp atiende a los comercios?</b> Es el que va en el botón del perfil.</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="pie">
+  <div class="env pie__in">
+    <span class="marca"><i></i>Emanuel Seery</span>
+    <span>Documento privado, preparado para MIOMIO. No está publicado en buscadores.</span>
+    <span class="pie__links">
+      <a href="https://wa.me/5493329476764" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="mailto:emanuelseery3@gmail.com">Mail</a>
+      <a href="https://instagram.com/syemanuel_" target="_blank" rel="noopener">Instagram</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var barra = document.getElementById('barra');
+  var portada = document.querySelector('.portada');
+  var marcas = [].slice.call(document.querySelectorAll('#avance i'));
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function(e){
+      if (e[0].isIntersecting) barra.removeAttribute('data-fija');
+      else barra.setAttribute('data-fija','');
+    }, {rootMargin:'-60px 0px 0px 0px'}).observe(portada);
+  } else { barra.setAttribute('data-fija',''); }
+  var pend = false;
+  function pintar(){
+    pend = false;
+    var alto = document.documentElement.scrollHeight - innerHeight;
+    var n = Math.round((alto > 0 ? Math.min(1, scrollY / alto) : 0) * marcas.length);
+    marcas.forEach(function(m,i){ m.classList.toggle('on', i < n); });
+  }
+  addEventListener('scroll', function(){ if(!pend){ pend = true; requestAnimationFrame(pintar); } }, {passive:true});
+  pintar();
+
+  // cada ficha, tabla, matriz y bloque arranca su entrada cuando entra en pantalla
+  document.documentElement.classList.add('js');
+  [].forEach.call(document.querySelectorAll('.aparece'), function(a){
+    [].forEach.call(a.children, function(c,i){ c.style.setProperty('--q', i); });
+  });
+  [].forEach.call(document.querySelectorAll('.tabla tbody'), function(tb){
+    [].forEach.call(tb.children, function(tr,i){ tr.style.setProperty('--i', i); });
+  });
+  [].forEach.call(document.querySelectorAll('[data-ver]'), function(a){
+    [].forEach.call(a.querySelectorAll('.entra'), function(c,i){ c.style.setProperty('--q', i); });
+  });
+  var fichas = [].slice.call(document.querySelectorAll('.ficha, .versus, .foda, .personas, .cruce, .segs, .giro, .s08-tres, .aparece, .tabla, .temas, .embudo, .gantt, [data-ver]'));
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('visto'); io.unobserve(e.target); } });
+    }, {threshold:.2});
+    fichas.forEach(function(f){ io.observe(f); });
+  } else { fichas.forEach(function(f){ f.classList.add('visto'); }); }
+
+  // 12: cada punto de la lista prende su marca sobre la captura
+  var pins = {};
+  [].forEach.call(document.querySelectorAll('.pin'), function(p){ pins[p.getAttribute('data-pin')] = p; });
+  var quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  [].forEach.call(document.querySelectorAll('.marca__b'), function(b){
+    var n = b.getAttribute('data-ir');
+    function prender(si){ if (pins[n]) pins[n].classList.toggle('act', si); }
+    b.addEventListener('mouseenter', function(){ prender(true); });
+    b.addEventListener('focus', function(){ prender(true); });
+    b.addEventListener('mouseleave', function(){ prender(false); });
+    b.addEventListener('blur', function(){ prender(false); });
+    b.addEventListener('click', function(){ if (pins[n]) pins[n].scrollIntoView({block:'center', behavior: quieto ? 'auto' : 'smooth'}); });
+  });
+})();
+</script>
+<script>
+// Animaciones propias de MIOMIO, cada una con un motivo:
+// el 42 cuenta (es mucho catálogo para cero redes) y un solo video suena a la vez.
+(function(){
+  var quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cuentas = [].slice.call(document.querySelectorAll('[data-cuenta]'));
+  function contar(el){
+    var fin = +el.getAttribute('data-cuenta'), t0 = null;
+    function paso(t){ if (!t0) t0 = t; var k = Math.min(1, (t - t0) / 1100); el.textContent = Math.round(fin * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(paso); }
+    el.textContent = '0'; requestAnimationFrame(paso);
+  }
+  if (!quieto && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { contar(e.target); io.unobserve(e.target); } }); }, {threshold:.6});
+    cuentas.forEach(function(c){ io.observe(c); });
+  }
+  var videos = [].slice.call(document.querySelectorAll('video'));
+  videos.forEach(function(v){ v.addEventListener('play', function(){ videos.forEach(function(o){ if (o !== v && !o.paused) o.pause(); }); }); });
+})();
+</script>
+</body>
+</html>
