@@ -856,6 +856,32 @@ html.js .cadena li:nth-child(4)::before{transition-delay:1.3s}
 .ig__dest svg{width:26px;height:26px;fill:none;stroke:var(--hueso);stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round}
 .ig__pie{margin-top:14px;font-size:12px;color:var(--gris);font-weight:300}
 @media(max-width:800px){.perfil{grid-template-columns:minmax(0,1fr);gap:44px 0}.ig{max-width:390px}}
+/* §02: la apertura de la Parte 1 es también la tapa de la sección. Se lee en una sola columna,
+   de arriba abajo: título → la idea central → 1 canal por canal → 2 lo que falta.
+   Jerarquía por tamaño y peso; el naranja queda solo para rótulos y números. */
+.s02-cab{background:var(--negro-2);border-top:1px solid var(--linea);padding:88px 0 56px}
+.s02-cab h2{margin:14px 0 0;font-family:var(--tit);font-weight:700;letter-spacing:-.045em;font-size:clamp(44px,6vw,80px);line-height:.95}
+.s02-cab__q{margin:18px 0 0;max-width:48ch;font-size:clamp(17px,1.5vw,20px);line-height:1.5;font-weight:300;color:var(--gris)}
+.s02-cuerpo{padding-top:64px;display:flex;flex-direction:column;gap:88px}
+.s02-tesis{max-width:760px}
+.s02-tesis__t{margin:0;font-family:var(--tit);font-weight:600;letter-spacing:-.04em;font-size:clamp(30px,3.6vw,48px);line-height:1.05}
+.s02-tesis__x{margin:16px 0 0;max-width:56ch;font-size:18px;line-height:1.6;font-weight:400;color:var(--hueso)}
+.s02-tesis__x b{font-weight:600}
+.s02-bloque{margin:0}
+.s02-bloque__cab{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:baseline;gap:0 14px;padding-bottom:18px}
+.s02-n{font-family:var(--tit);font-weight:600;font-size:15px;color:var(--naranja);font-variant-numeric:tabular-nums}
+.s02-bloque__cab h3{margin:0;font-family:var(--tit);font-weight:600;letter-spacing:-.03em;font-size:clamp(22px,2.4vw,28px);line-height:1.15}
+.s02-fecha{font-size:13px;font-weight:300;color:var(--gris)}
+.s02-bloque .nadie{max-width:760px}
+.canales span + span{margin-top:6px;color:var(--gris)}
+.s02-conclu{margin:0;padding:22px 0 0;border-top:1px solid var(--linea-2);font-family:var(--tit);font-weight:600;letter-spacing:-.03em;font-size:clamp(18px,1.9vw,22px);line-height:1.3;max-width:52ch}
+@media(max-width:800px){
+  .s02-cab{padding:64px 0 40px}
+  .s02-cuerpo{padding-top:44px;gap:64px}
+  .s02-bloque__cab{grid-template-columns:auto minmax(0,1fr)}
+  .s02-fecha{grid-column:2;margin-top:4px}
+  .s02-tesis__x{font-size:16.5px}
+}
 /* Apertura de sección: la columna derecha de .intro puede traer un rótulo y una lista */
 .intro > div > .rot{display:block;margin-bottom:14px}
 /* Animaciones con motivo (todas se ven completas sin JS y con movimiento reducido):
@@ -1016,58 +1042,41 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
   </div>
 </section>
 
-<div class="parte-sep" id="parte-1">
-  <div class="env parte-sep__in">
-    <span class="rot rot--nar">Parte 1</span>
-    <p class="parte-sep__t">Diagnóstico</p>
-    <p class="parte-sep__q">Dónde está hoy MIOMIO, qué tiene a favor y en qué contexto compite.</p>
-  </div>
-</div>
-<section id="s02">
-  <div class="env">
-    <div class="tapa">
-      <span class="rot rot--nar">Parte 1 · 02</span>
+<section id="s02" class="s02-junta">
+  <div id="parte-1" class="s02-cab">
+    <div class="env">
+      <span class="rot rot--nar">Parte 1 · Diagnóstico · 02</span>
       <h2>Situación actual</h2>
+      <p class="s02-cab__q">Dónde está hoy MIOMIO, qué tiene a favor y en qué contexto compite.</p>
     </div>
+  </div>
 
-    <div class="intro">
-      <p class="intro__lead">Una fábrica <em>que nadie encuentra.</em></p>
-      <p class="intro__txt">Ya produce y le vende por mayor a comercios de todo el país. Tiene planta,
+  <div class="env s02-cuerpo">
+    <div class="s02-tesis">
+      <p class="s02-tesis__t">Una fábrica que nadie encuentra.</p>
+      <p class="s02-tesis__x">Ya produce y le vende por mayor a comercios de todo el país. Tiene planta,
       depósito, clientes y catálogo. <b>Lo que no tiene es dónde mostrarlo.</b></p>
     </div>
 
-    <div class="cifras aparece">
-      <div class="cifra cifra--gris">
-        <span class="rot">El catálogo 2026</span>
-        <span class="cifra__n" data-cuenta="42">42</span>
-        <span class="cifra__q">páginas, en cuatro secciones y con código por artículo.</span>
-      </div>
-      <div class="cifra cifra--nar">
-        <span class="rot rot--nar">Redes de la marca</span>
-        <span class="cifra__n">0</span>
-        <span class="cifra__q">Ni Instagram ni Facebook. La web muestra la página que pone el hosting.</span>
-      </div>
-      <p class="cifras__pie">El catálogo está armado. El que lo recibe y busca la marca no encuentra nada.</p>
-    </div>
-
-    <figure class="tablero" style="margin-left:0;margin-right:0" aria-labelledby="tab-t">
-      <div class="tablero__cab">
+    <figure class="s02-bloque" aria-labelledby="tab-t">
+      <div class="s02-bloque__cab">
+        <span class="s02-n">1</span>
         <h3 id="tab-t">Canal por canal</h3>
-        <span>Revisado el 25 de octubre de 2026.</span>
+        <span class="s02-fecha">Revisado el 25 de octubre de 2026</span>
       </div>
       <div class="cols">
         <div class="col col--al">
           <span class="rot">Funciona</span>
           <span class="col__n">1</span>
           <ul class="canales">
-            <li><b>Venta por catálogo</b><span>Es como consiguen clientes hoy. Contesta Diego.</span></li>
+            <li><b>Venta por catálogo</b><span>Es como consiguen clientes hoy. Contesta Diego.</span><span>Catálogo 2026: 42 páginas, en cuatro secciones y con código por artículo.</span></li>
           </ul>
         </div>
         <div class="col col--atras">
           <span class="rot">Existe, pero no alcanza</span>
           <span class="col__n">2</span>
           <ul class="canales">
-            <li><b>miomioplasticos.com</b><span>El dominio está, la web no.</span></li>
+            <li><b>miomioplasticos.com</b><span>El dominio está; la web muestra la página que pone el hosting.</span></li>
             <li><b>Logo</b><span>Sin un sistema visual detrás.</span></li>
           </ul>
         </div>
@@ -1080,10 +1089,14 @@ html.js .kpis.visto .kpi:first-child h4{background-size:100% 3px}
           </ul>
         </div>
       </div>
+      <p class="s02-conclu">El catálogo está armado. El que lo recibe y busca la marca no encuentra nada.</p>
     </figure>
 
-    <div class="intro s02-puntos">
-      <p class="intro__lead">Al catálogo le falta <em>justo lo que más les preguntan.</em></p>
+    <div class="s02-bloque">
+      <div class="s02-bloque__cab">
+        <span class="s02-n">2</span>
+        <h3>Al catálogo le falta justo lo que más les preguntan</h3>
+      </div>
       <ol class="nadie">
         <li><span><b>Precio por cantidad.</b> No dice desde cuánto es «por mayor».</span></li>
         <li><span><b>Pago, envío y pedido mínimo.</b> No figuran en ningún lado.</span></li>
